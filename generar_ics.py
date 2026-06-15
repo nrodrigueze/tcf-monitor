@@ -8,6 +8,7 @@ Se corre automáticamente por GitHub Actions después de cada revisión.
 """
 
 import json
+import re
 import uuid
 from datetime import datetime, date, timedelta, timezone
 from pathlib import Path
@@ -180,10 +181,43 @@ URLS_REGISTRO = {
     "AF Halifax":             "https://afhalifax.ca/test-your-french/tcf/",
     "Ashton Testing Services":"https://ashtontesting.ca/tcf-canada-test/",
     "GB Language Centre":     "https://gblc.ca/en/tests/tcf-canada",
+    "AF Victoria":            "https://www.afvictoria.ca/exams/tcf/",
 }
 
+def parse_fecha_oncord(texto_fecha: str) -> date | None:
+    """Parsea fechas como 'September 2, 2026' o '02 Sep 2026' a date."""
+    from calendar import month_abbr
+    meses = {m.lower(): i for i, m in enumerate(month_abbr) if m}
+    meses_full = {
+        "january":1,"february":2,"march":3,"april":4,"may":5,"june":6,
+        "july":7,"august":8,"september":9,"october":10,"november":11,"december":12
+    }
+    meses.update(meses_full)
+
+    # "September 2, 2026" o "September 9, 2026"
+    m = re.match(r"(\w+)\s+(\d{1,2}),?\s+(\d{4})", texto_fecha.strip(), re.IGNORECASE)
+    if m:
+        mes = meses.get(m.group(1).lower()[:3]) or meses.get(m.group(1).lower())
+        if mes:
+            try:
+                return date(int(m.group(3)), mes, int(m.group(2)))
+            except Exception:
+                pass
+
+    # "02 Sep 2026"
+    m = re.match(r"(\d{1,2})\s+(\w+)\s+(\d{4})", texto_fecha.strip(), re.IGNORECASE)
+    if m:
+        mes = meses.get(m.group(2).lower()[:3]) or meses.get(m.group(2).lower())
+        if mes:
+            try:
+                return date(int(m.group(3)), mes, int(m.group(1)))
+            except Exception:
+                pass
+    return None
+
+
 def eventos_dinamicos(estado: dict, hoy: date) -> list[list[str]]:
-    """Genera un evento por centro con su estado actual."""
+    """Genera eventos por centro. Para Vancouver, un evento por sesión individual."""
     resultado = []
     for nombre, datos in estado.items():
         est = datos.get("estado", "VERIFICAR")
@@ -192,8 +226,130 @@ def eventos_dinamicos(estado: dict, hoy: date) -> list[list[str]]:
         ts = datos.get("ts", "")[:16].replace("T", " ")
         emoji = EMOJIS_ESTADO.get(est, "❓")
         url = URLS_REGISTRO.get(nombre, "")
+        sesiones = datos.get("sesiones", [])
 
-        # Descripción
+        # ── Vancouver: evento individual por sesión ──
+        if nombre == "AF Vancouver" and sesiones:
+            for i, ses in enumerate(sesiones):
+                fecha_txt = ses.get("fecha_examen", "")
+                estado_boton = ses.get("estado_boton", "VERIFICAR")
+                spots = ses.get("spots", 0)
+                abre = ses.get("abre_registro", "")
+
+                if estado_boton == "FULL":
+                    emoji_ses = "🔴"
+                    est_ses = "FULL"
+                    confirmado = False
+                elif estado_boton == "DISPONIBLE":
+                    emoji_ses = "🟢"
+                    est_ses = "DISPONIBLE"
+                    confirmado = True
+                else:
+                    emoji_ses = "🕐"
+                    est_ses = estado_boton
+                    confirmado = False
+
+                summary = f"{emoji_ses} TCF Canada — AF Vancouver {fecha_txt} [{est_ses}]"
+                desc_parts = [
+                    f"Centro: Alliance Française Vancouver",
+                    f"Examen: {fecha_txt}",
+                    f"Estado: {est_ses}",
+                ]
+                if spots:
+                    desc_parts.append(f"Cupos disponibles: {spots}")
+                if abre:
+                    desc_parts.append(f"Registro abre: {abre}")
+                desc_parts += [
+                    "Precio: $390 CAD",
+                    f"Revisión: {ts}",
+                    f"Registrarse: {url}",
+                ]
+
+                # Intentar parsear la fecha para el evento de calendario
+                d = parse_fecha_oncord(fecha_txt) if fecha_txt else None
+                ev_date = d if d else hoy
+
+                ev = make_event(
+                    uid=f"van-sesion-{i}-{fecha_txt.replace(' ','').replace(',','')}",
+                    summary=summary,
+                    dtstart=ev_date,
+                    dtend=ev_date,
+                    description="\n".join(desc_parts),
+                    location="6161 Cambie Street, Vancouver, BC V5Z 3B2",
+                    url=url,
+                    confirmed=confirmado,
+                )
+                resultado.append(ev)
+
+            # Agregar también evento de apertura de registro para sesiones PRÓXIMAS
+            for ses in sesiones:
+                if ses.get("abre_registro") and ses.get("estado_boton", "") not in ("FULL", "DISPONIBLE"):
+                    abre_txt = ses.get("abre_registro", "")
+                    fecha_exam = ses.get("fecha_examen", "")
+                    # Parsear fecha de apertura
+                    d_abre = None
+                    m_abre = re.search(
+                        r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4})",
+                        abre_txt, re.IGNORECASE
+                    )
+                    if m_abre:
+                        d_abre = parse_fecha_oncord(m_abre.group(1))
+
+                    if d_abre:
+                        ev = make_event(
+                            uid=f"van-registro-abre-{fecha_exam.replace(' ','').replace(',','')}",
+                            summary=f"⏰ REGISTRO ABRE — AF Vancouver {fecha_exam}",
+                            dtstart=d_abre,
+                            dtend=d_abre,
+                            description=f"Apertura de registro para TCF Canada {fecha_exam}\nHora: {abre_txt}\nRegistrarse: {url}",
+                            location="Alliance Française Vancouver",
+                            url=url,
+                            confirmed=True,
+                        )
+                        resultado.append(ev)
+            continue  # siguiente centro
+
+        # ── Victoria: misma lógica que Vancouver si tiene sesiones ──
+        if nombre == "AF Victoria" and sesiones:
+            for i, ses in enumerate(sesiones):
+                fecha_txt = ses.get("fecha_examen", "")
+                estado_boton = ses.get("estado_boton", "VERIFICAR")
+                spots = ses.get("spots", 0)
+                abre = ses.get("abre_registro", "")
+
+                if estado_boton == "FULL":
+                    emoji_ses, est_ses, confirmado = "🔴", "FULL", False
+                elif estado_boton == "DISPONIBLE":
+                    emoji_ses, est_ses, confirmado = "🟢", "DISPONIBLE", True
+                else:
+                    emoji_ses, est_ses, confirmado = "🕐", estado_boton, False
+
+                desc_parts = [
+                    "Centro: Alliance Française Victoria",
+                    f"Examen: {fecha_txt}",
+                    f"Estado: {est_ses}",
+                ]
+                if spots:
+                    desc_parts.append(f"Cupos disponibles: {spots}")
+                if abre:
+                    desc_parts.append(f"Registro abre: {abre}")
+                desc_parts += [f"Revisión: {ts}", f"Registrarse: {url}"]
+
+                d = parse_fecha_oncord(fecha_txt) if fecha_txt else None
+                ev = make_event(
+                    uid=f"vic-sesion-{i}-{fecha_txt.replace(' ','').replace(',','')}",
+                    summary=f"{emoji_ses} TCF Canada — AF Victoria {fecha_txt} [{est_ses}]",
+                    dtstart=d if d else hoy,
+                    dtend=d if d else hoy,
+                    description="\n".join(desc_parts),
+                    location="1B-1218 Langley Street, Victoria, BC",
+                    url=url,
+                    confirmed=confirmado,
+                )
+                resultado.append(ev)
+            continue
+
+        # ── Resto de centros: un evento de estado general ──
         desc_parts = [f"Estado: {est}", f"Revisión: {ts}"]
         if detalle:
             desc_parts.append(f"Detalle: {detalle}")
@@ -204,7 +360,6 @@ def eventos_dinamicos(estado: dict, hoy: date) -> list[list[str]]:
         description = "\n".join(desc_parts)
 
         summary = f"{emoji} TCF Canada — {nombre} [{est}]"
-
         ev = make_event(
             uid=f"estado-{nombre.lower().replace(' ','-')}",
             summary=summary,

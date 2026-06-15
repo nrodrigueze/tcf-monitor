@@ -70,8 +70,17 @@ CENTROS = [
         "ciudad": "Vancouver, BC",
         "url_check": "https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/",
         "url_registro": "https://www.alliancefrancaise.ca/products/ciep-tcf-canada-full-exam/",
+        "url_tabla": "https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/",
         "tipo": "vancouver",
-        "notas": "Sep: registro abre a mediados de junio. Oct–Dic: registro en sept.",
+        "notas": "Sep 2: SOLD OUT | Sep 4: SOLD OUT | Sep 9: abre Jun 17 12pm | $390 CAD",
+    },
+    {
+        "nombre": "AF Victoria",
+        "ciudad": "Victoria, BC",
+        "url_check": "https://www.afvictoria.ca/exams/tcf/",
+        "url_registro": "https://www.afvictoria.ca/exams/tcf/",
+        "tipo": "victoria",
+        "notas": "1B-1218 Langley Street, Victoria BC. Sin sesiones verano 2026. Reanudan oct 2026. info@afvictoria.ca",
     },
     {
         "nombre": "AF Toronto",
@@ -289,43 +298,110 @@ def _resultado_base(nombre, ciudad, url_r, url_c, notas) -> dict:
 
 
 def check_vancouver(centro: dict) -> dict:
+    """
+    AF Vancouver usa la plataforma Oncord con una tabla de sesiones que muestra:
+      - Exam name (TCF-Canada September 2, 2026)
+      - Schedules (Wed 02 Sep 2026 9am-4pm)
+      - Registration Dates (Jun 15 2026 12:00pm - Jun 30 2026 4:00pm)
+      - Location, Spots left, Price, Bookings (Full / Opens in Xd Xh / Book Now)
+    Parseamos esa tabla para extraer sesiones disponibles, próximas y agotadas.
+    """
     r = _resultado_base(centro["nombre"], centro["ciudad"],
                         centro["url_registro"], centro["url_check"], centro["notas"])
     soup = fetch_page(centro["url_check"])
     if not soup:
         r["estado"] = "BLOQUEADO"
-        r["detalle"] = "Sitio bloqueó el acceso (Cloudflare/WAF). Verificar manualmente."
+        r["detalle"] = "Sitio bloqueó el acceso. Verificar manualmente en alliancefrancaise.ca"
         return r
 
     texto = soup.get_text(" ", strip=True)
+    sesiones_disponibles = []
+    sesiones_proximas = []
+    sesiones_llenas = []
+    sesiones_raw = []   # lista de dicts con info completa para el ICS
 
-    # Buscar tabla de sesiones
-    sold_signals = ["sold out", "sold  out", "registrations start", "registration starts"]
-    open_signals = ["register for the tcf", "register now", "view product"]
+    # La tabla Oncord tiene filas con clase "event-row" o similar
+    # Cada fila contiene: nombre examen, schedules, registration dates, spots, precio, botón
+    filas = soup.find_all("tr")
+    if not filas:
+        # Fallback: buscar divs con clase de evento
+        filas = soup.find_all(class_=re.compile(r"event|session|row", re.I))
 
-    fechas = extraer_fechas(texto)
-    sold_count = sum(1 for s in sold_signals if s in texto.lower())
-    open_count = sum(1 for s in open_signals if s in texto.lower())
+    for fila in filas:
+        texto_fila = fila.get_text(" ", strip=True)
+        if "TCF" not in texto_fila.upper():
+            continue
 
-    # En la página de Vancouver, "SOLD OUT" o "REGISTRATIONS START MID-JUNE"
-    # son los marcadores clave
-    if "sold  out" in texto.lower() or "sold out" in texto.lower():
-        r["estado"] = "AGOTADO"
-        r["detalle"] = "Sesión actual marcada como SOLD OUT"
-    elif "registrations start" in texto.lower() or "registration starts" in texto.lower():
-        # Buscar la frase para ver si ya pasó la fecha de apertura
-        m = re.search(r"registrations?\s+start[s]?\s*:?\s*([^\n\.]{5,60})", texto, re.I)
-        apertura = m.group(1).strip() if m else "próximamente"
-        r["estado"] = "PRÓXIMO"
-        r["detalle"] = f"Apertura de registro: {apertura}"
-    elif open_count > 0:
+        info = {"texto": texto_fila}
+
+        # Extraer fecha del examen (ej: "September 2, 2026" o "02 Sep 2026")
+        m_fecha = re.search(
+            r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}"
+            r"|\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{4})",
+            texto_fila, re.IGNORECASE
+        )
+        if m_fecha:
+            info["fecha_examen"] = m_fecha.group(1).strip()
+
+        # Extraer spots disponibles
+        m_spots = re.search(r"(\d+)\s*(?:spots?|cupos?|places?)\s*(?:left|remaining|available)?",
+                            texto_fila, re.IGNORECASE)
+        if m_spots:
+            info["spots"] = int(m_spots.group(1))
+
+        # Detectar estado del botón
+        texto_low = texto_fila.lower()
+        if "full" in texto_low and "spots" not in texto_low:
+            info["estado_boton"] = "FULL"
+            sesiones_llenas.append(info.get("fecha_examen", texto_fila[:40]))
+        elif re.search(r"opens?\s+in\s+\d+", texto_low):
+            m_opens = re.search(r"(opens?\s+in\s+[\d\w\s]+)", texto_fila, re.IGNORECASE)
+            info["estado_boton"] = m_opens.group(1).strip() if m_opens else "PRÓXIMO"
+            # Extraer fecha de apertura de registro
+            m_reg = re.search(
+                r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}"
+                r"\s+\d{1,2}:\d{2}(?:am|pm))",
+                texto_fila, re.IGNORECASE
+            )
+            if m_reg:
+                info["abre_registro"] = m_reg.group(1).strip()
+            sesiones_proximas.append(info)
+        elif "book now" in texto_low or ("spots" in texto_low and info.get("spots", 0) > 0):
+            info["estado_boton"] = "DISPONIBLE"
+            sesiones_disponibles.append(info)
+
+        sesiones_raw.append(info)
+
+    # Guardar sesiones completas para el ICS
+    r["sesiones"] = sesiones_raw
+
+    if sesiones_disponibles:
         r["estado"] = "DISPONIBLE"
-        r["fechas"] = fechas[:6]
-        r["detalle"] = "Botón de registro activo detectado"
+        r["fechas"] = [s.get("fecha_examen", "?") for s in sesiones_disponibles]
+        spots_total = sum(s.get("spots", 0) for s in sesiones_disponibles)
+        r["detalle"] = f"{len(sesiones_disponibles)} sesión(es) disponible(s) — {spots_total} cupos totales"
+    elif sesiones_proximas:
+        r["estado"] = "PRÓXIMO"
+        proxima = sesiones_proximas[0]
+        abre = proxima.get("abre_registro", proxima.get("estado_boton", "próximamente"))
+        r["fechas"] = [s.get("fecha_examen", "?") for s in sesiones_proximas]
+        r["detalle"] = f"Registro abre: {abre}"
+    elif sesiones_llenas:
+        r["estado"] = "AGOTADO"
+        r["fechas"] = sesiones_llenas[:5]
+        r["detalle"] = f"{len(sesiones_llenas)} sesión(es) FULL"
     else:
-        r["estado"] = "VERIFICAR"
-        r["fechas"] = fechas[:6]
-        r["detalle"] = "Verificar manualmente"
+        # Fallback a texto plano si no se parseó tabla
+        if "sold out" in texto.lower() or "full" in texto.lower():
+            r["estado"] = "AGOTADO"
+            r["detalle"] = "Sesiones marcadas como FULL/SOLD OUT"
+        elif "opens in" in texto.lower():
+            r["estado"] = "PRÓXIMO"
+            m = re.search(r"opens?\s+in\s+([\d\w\s]+)", texto, re.IGNORECASE)
+            r["detalle"] = f"Registro abre en: {m.group(1).strip() if m else 'próximamente'}"
+        else:
+            r["estado"] = "VERIFICAR"
+            r["detalle"] = "Sin tabla de sesiones detectada — verificar manualmente"
 
     return r
 
@@ -553,8 +629,107 @@ def check_gblc(centro: dict) -> dict:
 # ─────────────────────────────────────────────────────────
 #  DESPACHO
 # ─────────────────────────────────────────────────────────
+def check_victoria(centro: dict) -> dict:
+    """
+    AF Victoria usa la misma plataforma Oncord que Vancouver.
+    Parsea tabla de sesiones: si no hay fechas = agotado.
+    Nota: sin sesiones verano 2026, reanudan octubre 2026.
+    """
+    r = _resultado_base(centro["nombre"], centro["ciudad"],
+                        centro["url_registro"], centro["url_check"], centro["notas"])
+    soup = fetch_page(centro["url_check"])
+    if not soup:
+        r["estado"] = "BLOQUEADO"
+        r["detalle"] = "Sitio bloqueó el acceso. Verificar en afvictoria.ca/exams/tcf/"
+        return r
+
+    texto = soup.get_text(" ", strip=True)
+    texto_low = texto.lower()
+    sesiones_raw = []
+
+    # Buscar tabla Oncord
+    filas = soup.find_all("tr")
+    sesiones_disponibles = []
+    sesiones_proximas = []
+    sesiones_llenas = []
+
+    for fila in filas:
+        texto_fila = fila.get_text(" ", strip=True)
+        if "TCF" not in texto_fila.upper():
+            continue
+        info = {"texto": texto_fila}
+
+        m_fecha = re.search(
+            r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}"
+            r"|\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{4})",
+            texto_fila, re.IGNORECASE
+        )
+        if m_fecha:
+            info["fecha_examen"] = m_fecha.group(1).strip()
+
+        m_spots = re.search(r"(\d+)\s*(?:spots?|cupos?|places?)\s*(?:left|remaining|available)?",
+                            texto_fila, re.IGNORECASE)
+        if m_spots:
+            info["spots"] = int(m_spots.group(1))
+
+        texto_fila_low = texto_fila.lower()
+        if "full" in texto_fila_low and "spots" not in texto_fila_low:
+            info["estado_boton"] = "FULL"
+            sesiones_llenas.append(info.get("fecha_examen", texto_fila[:40]))
+        elif re.search(r"opens?\s+in\s+\d+", texto_fila_low):
+            m_opens = re.search(r"(opens?\s+in\s+[\d\w\s]+)", texto_fila, re.IGNORECASE)
+            info["estado_boton"] = m_opens.group(1).strip() if m_opens else "PRÓXIMO"
+            m_reg = re.search(
+                r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}\s+\d{1,2}:\d{2}(?:am|pm))",
+                texto_fila, re.IGNORECASE
+            )
+            if m_reg:
+                info["abre_registro"] = m_reg.group(1).strip()
+            sesiones_proximas.append(info)
+        elif "book now" in texto_fila_low or ("spots" in texto_fila_low and info.get("spots", 0) > 0):
+            info["estado_boton"] = "DISPONIBLE"
+            sesiones_disponibles.append(info)
+
+        sesiones_raw.append(info)
+
+    r["sesiones"] = sesiones_raw
+
+    if sesiones_disponibles:
+        r["estado"] = "DISPONIBLE"
+        r["fechas"] = [s.get("fecha_examen", "?") for s in sesiones_disponibles]
+        spots_total = sum(s.get("spots", 0) for s in sesiones_disponibles)
+        r["detalle"] = f"{len(sesiones_disponibles)} sesión(es) disponible(s) — {spots_total} cupos"
+    elif sesiones_proximas:
+        r["estado"] = "PRÓXIMO"
+        proxima = sesiones_proximas[0]
+        abre = proxima.get("abre_registro", proxima.get("estado_boton", "próximamente"))
+        r["fechas"] = [s.get("fecha_examen", "?") for s in sesiones_proximas]
+        r["detalle"] = f"Registro abre: {abre}"
+    elif sesiones_llenas:
+        r["estado"] = "AGOTADO"
+        r["fechas"] = sesiones_llenas[:5]
+        r["detalle"] = f"{len(sesiones_llenas)} sesión(es) FULL"
+    else:
+        # Fallback texto plano
+        kw_sold = ["sold out", "no dates available", "check back", "check our website regularly"]
+        kw_summer = ["no tcf-canada session will be held during summer", "resume in october",
+                     "check back on this page", "sold out at the moment"]
+        if any(k in texto_low for k in kw_summer):
+            r["estado"] = "AGOTADO"
+            r["detalle"] = "Sin sesiones verano 2026 — reanudan octubre 2026"
+        elif any(k in texto_low for k in kw_sold):
+            r["estado"] = "AGOTADO"
+            r["detalle"] = "Agotado — revisar regularmente"
+        else:
+            r["estado"] = "VERIFICAR"
+            r["detalle"] = "Sin fechas detectadas — verificar en afvictoria.ca/exams/tcf/"
+
+    return r
+
+
 CHECKERS = {
     "vancouver": check_vancouver,
+    "victoria":  check_victoria,
     "toronto":   check_toronto,
     "ottawa":    check_ottawa,
     "montreal":  check_montreal,
