@@ -2,55 +2,61 @@
   "AF Vancouver": {
     "estado": "VERIFICAR",
     "fechas": [],
-    "detalle": "Verificar manualmente",
-    "ts": "2026-06-15T22:11:59.286987"
+    "detalle": "Sin tabla de sesiones detectada — verificar manualmente",
+    "ts": "2026-06-15T23:28:32.857670"
+  },
+  "AF Victoria": {
+    "estado": "VERIFICAR",
+    "fechas": [],
+    "detalle": "Sin fechas detectadas — verificar en afvictoria.ca/exams/tcf/",
+    "ts": "2026-06-15T23:28:39.689809"
   },
   "AF Toronto": {
-    "estado": "BLOQUEADO",
+    "estado": "VERIFICAR",
     "fechas": [],
-    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-06-15T22:12:06.593912"
+    "detalle": "Sin fechas detectadas — verificar manualmente",
+    "ts": "2026-06-15T23:28:44.178973"
   },
   "AF Ottawa": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-15T22:12:24.960974"
+    "ts": "2026-06-15T23:28:48.858733"
   },
   "AF Montréal": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-15T22:12:29.137623"
+    "ts": "2026-06-15T23:28:53.430766"
   },
   "AF Calgary": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-15T22:12:33.314219"
+    "ts": "2026-06-15T23:28:58.008255"
   },
   "AF Edmonton": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-15T22:12:38.024248"
+    "ts": "2026-06-15T23:29:02.537431"
   },
   "AF Halifax": {
     "estado": "DISPONIBLE",
     "fechas": [],
     "detalle": "Indicadores de registro abierto detectados",
-    "ts": "2026-06-15T22:12:43.704566"
+    "ts": "2026-06-15T23:29:07.746438"
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-06-15T22:12:49.689553"
+    "ts": "2026-06-15T23:29:14.264198"
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-06-15T22:13:08.671233"
+    "ts": "2026-06-15T23:29:32.525191"
   }
 }
