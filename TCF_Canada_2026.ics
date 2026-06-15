@@ -1,0 +1,294 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//TCF Canada Monitor//nrodrigueze//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:TCF Canada 2026 — Monitor
+X-WR-TIMEZONE:America/Vancouver
+X-WR-CALDESC:Actualizado 2026-06-15 — 9 centros en Canadá. Estado en tie
+ mpo real + fechas fijas.
+REFRESH-INTERVAL;VALUE=DURATION:PT2H
+SOURCE:https://raw.githubusercontent.com/nrodrigueze/tcf-monitor/main/TCF_C
+ anada_2026.ics
+BEGIN:VEVENT
+UID:estado-af-vancouver@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+SUMMARY:⚠️ TCF Canada — AF Vancouver [VERIFICAR]
+DESCRIPTION:Estado: VERIFICAR\nRevisión: 2026-06-15 22:08\nDetalle: Verifi
+ car manualmente\nRegistrarse: https://www.alliancefrancaise.ca/products/ci
+ ep-tcf-canada-full-exam/
+URL:https://www.alliancefrancaise.ca/products/ciep-tcf-canada-full-exam/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:estado-af-toronto@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+SUMMARY:⚠️ TCF Canada — AF Toronto [VERIFICAR]
+DESCRIPTION:Estado: VERIFICAR\nRevisión: 2026-06-15 22:08\nDetalle: Sin fe
+ chas detectadas — verificar manualmente\nRegistrarse: https://www.allian
+ ce-francaise.ca/en/exams/tests/informations-about-tcf-canada/tcf-canada
+URL:https://www.alliance-francaise.ca/en/exams/tests/informations-about-tcf
+ -canada/tcf-canada
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:estado-af-ottawa@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+SUMMARY:⚠️ TCF Canada — AF Ottawa [VERIFICAR]
+DESCRIPTION:Estado: VERIFICAR\nRevisión: 2026-06-15 22:08\nDetalle: Sin se
+ ñales claras — verificar manualmente\nRegistrarse: https://af.ca/ottawa
+ /en/tests_et_examens/tcf/
+URL:https://af.ca/ottawa/en/tests_et_examens/tcf/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:estado-af-montréal@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+SUMMARY:⚠️ TCF Canada — AF Montréal [VERIFICAR]
+DESCRIPTION:Estado: VERIFICAR\nRevisión: 2026-06-15 22:08\nDetalle: Sin se
+ ñales claras — verificar manualmente\nRegistrarse: https://www.afmontre
+ al.ca/tcf/
+URL:https://www.afmontreal.ca/tcf/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:estado-af-calgary@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+SUMMARY:⚠️ TCF Canada — AF Calgary [VERIFICAR]
+DESCRIPTION:Estado: VERIFICAR\nRevisión: 2026-06-15 22:08\nDetalle: Sin se
+ ñales claras — verificar manualmente\nRegistrarse: https://www.afcalgar
+ y.ca/exams/tcf/registration-process/
+URL:https://www.afcalgary.ca/exams/tcf/registration-process/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:estado-af-edmonton@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+SUMMARY:⚠️ TCF Canada — AF Edmonton [VERIFICAR]
+DESCRIPTION:Estado: VERIFICAR\nRevisión: 2026-06-15 22:08\nDetalle: Sin se
+ ñales claras — verificar manualmente\nRegistrarse: https://www.afedmont
+ on.com/en/exams/tcf/
+URL:https://www.afedmonton.com/en/exams/tcf/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:estado-af-halifax@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+SUMMARY:🟢 TCF Canada — AF Halifax [DISPONIBLE]
+DESCRIPTION:Estado: DISPONIBLE\nRevisión: 2026-06-15 22:08\nDetalle: Indic
+ adores de registro abierto detectados\nRegistrarse: https://afhalifax.ca/t
+ est-your-french/tcf/
+URL:https://afhalifax.ca/test-your-french/tcf/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:estado-ashton-testing-services@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+SUMMARY:🔒 TCF Canada — Ashton Testing Services [BLOQUEADO]
+DESCRIPTION:Estado: BLOQUEADO\nRevisión: 2026-06-15 22:08\nDetalle: Sitio 
+ bloqueó el acceso. Verificar manualmente.\nRegistrarse: https://ashtontes
+ ting.ca/tcf-canada-test/
+URL:https://ashtontesting.ca/tcf-canada-test/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:estado-gb-language-centre@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+SUMMARY:⚠️ TCF Canada — GB Language Centre [VERIFICAR]
+DESCRIPTION:Estado: VERIFICAR\nRevisión: 2026-06-15 22:09\nDetalle: Págin
+ a renderiza con JS\; verificar manualmente en gblc.ca\nRegistrarse: https:
+ //gblc.ca/en/tests/tcf-canada
+URL:https://gblc.ca/en/tests/tcf-canada
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:ashton-jul05@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260705
+DTEND;VALUE=DATE:20260706
+SUMMARY:🔴 TCF Canada — Ashton Vancouver 9:00 AM [FULL]
+DESCRIPTION:Ashton Testing Services — Sesión COMPLETA\nHora: 9:00 AM\nCo
+ sto: $410 CAD\ntestcentre@ashtontesting.ca | (604) 628-5783
+LOCATION:410-1190 Melville Street\, Vancouver\, BC V6E 3W1
+URL:https://ashtontesting.ca/tcf-canada-test/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:ashton-jul12@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260712
+DTEND;VALUE=DATE:20260713
+SUMMARY:🔴 TCF Canada — Ashton Vancouver 9:00 AM [FULL]
+DESCRIPTION:Ashton Testing Services — Sesión COMPLETA\nHora: 9:00 AM\nCo
+ sto: $410 CAD
+LOCATION:410-1190 Melville Street\, Vancouver\, BC V6E 3W1
+URL:https://ashtontesting.ca/tcf-canada-test/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:ashton-jul17@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260717
+DTEND;VALUE=DATE:20260718
+SUMMARY:🔴 TCF Canada — Ashton Vancouver 5:00 PM [FULL]
+DESCRIPTION:Ashton Testing Services — Sesión COMPLETA\nHora: 5:00 PM\nCo
+ sto: $410 CAD
+LOCATION:410-1190 Melville Street\, Vancouver\, BC V6E 3W1
+URL:https://ashtontesting.ca/tcf-canada-test/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:ashton-jul24@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260724
+DTEND;VALUE=DATE:20260725
+SUMMARY:🔴 TCF Canada — Ashton Vancouver 5:00 PM [FULL]
+DESCRIPTION:Ashton Testing Services — Sesión COMPLETA\nHora: 5:00 PM\nCo
+ sto: $410 CAD
+LOCATION:410-1190 Melville Street\, Vancouver\, BC V6E 3W1
+URL:https://ashtontesting.ca/tcf-canada-test/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:ashton-jul30@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260730
+DTEND;VALUE=DATE:20260731
+SUMMARY:🔴 TCF Canada — Ashton Vancouver 5:00 PM [FULL]
+DESCRIPTION:Ashton Testing Services — Sesión COMPLETA\nHora: 5:00 PM\nCo
+ sto: $410 CAD
+LOCATION:410-1190 Melville Street\, Vancouver\, BC V6E 3W1
+URL:https://ashtontesting.ca/tcf-canada-test/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:toronto-q3-open@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260520
+DTEND;VALUE=DATE:20260521
+SUMMARY:📅 REGISTRO ABRE — AF Toronto Q3 (Jul–Sep 2026) 10:00 AM
+DESCRIPTION:AF Toronto — Apertura de registro Q3 (Julio–Septiembre 2026
+ )\nHora: 10:00 AM\nCosto: $390 CAD\nFormatos: E-TCF y P-TCF\nCampus: Downt
+ own Toronto\, North York\, Mississauga\, Oakville
+LOCATION:Alliance Française Toronto — 4 campus en GTA
+URL:https://www.alliance-francaise.ca/en/exams/tests/informations-about-tcf
+ -canada/tcf-canada
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:toronto-q4-open@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260815
+DTEND;VALUE=DATE:20260816
+SUMMARY:📅 REGISTRO ABRE — AF Toronto Q4 (Oct–Dic 2026) 10:00 AM
+DESCRIPTION:AF Toronto — Apertura de registro Q4 (Octubre–Diciembre 202
+ 6)\nHora: 10:00 AM\nCosto: $390 CAD
+LOCATION:Alliance Française Toronto — 4 campus en GTA
+URL:https://www.alliance-francaise.ca/en/exams/tests/informations-about-tcf
+ -canada/tcf-canada
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:van-sep-open@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260615
+DTEND;VALUE=DATE:20260616
+SUMMARY:📅 REGISTRO ABRE — AF Vancouver Septiembre 2026
+DESCRIPTION:AF Vancouver — Registro para septiembre 2026 abre a mediados 
+ de junio\nCosto: $390 CAD\ntef.tcf@alliancefrancaise.ca | (604) 327-0201
+LOCATION:Alliance Française Vancouver — 6161 Cambie Street\, Vancouver\,
+  BC
+URL:https://www.alliancefrancaise.ca/products/ciep-tcf-canada-full-exam/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:van-q4-open@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260901
+DTEND;VALUE=DATE:20260902
+SUMMARY:📅 REGISTRO ABRE — AF Vancouver Oct–Dic 2026
+DESCRIPTION:AF Vancouver — Registro para Oct–Dic 2026 abre en septiembr
+ e\nCosto: $390 CAD
+LOCATION:Alliance Française Vancouver — 6161 Cambie Street\, Vancouver\,
+  BC
+URL:https://www.alliancefrancaise.ca/products/ciep-tcf-canada-full-exam/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:fei-cierre-ago@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260803
+DTEND;VALUE=DATE:20260817
+SUMMARY:⛔ SIN EXÁMENES TCF — Cierre FEI (todos los centros)
+DESCRIPTION:France Éducation International (FEI) cierra del 3 al 16 de ago
+ sto 2026.\nNingún centro en Canadá puede ofrecer TCF durante este perío
+ do.\nResultados de exámenes de finales de julio pueden llegar con retraso
+ .
+URL:https://www.france-education-international.fr
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:ottawa-reanuda@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260818
+DTEND;VALUE=DATE:20260819
+SUMMARY:🟢 REANUDAN EXÁMENES TCF — AF Ottawa
+DESCRIPTION:AF Ottawa — Sesiones TCF reanudan después del cierre de vera
+ no de FEI.
+LOCATION:Alliance Française Ottawa — 352 MacLaren Street\, Ottawa ON
+URL:https://af.ca/ottawa/en/tests_et_examens/tcf/
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:gblc-sep-open@tcf-monitor-nrodrigueze
+DTSTAMP:20260615T220908Z
+LAST-MODIFIED:20260615T220908Z
+DTSTART;VALUE=DATE:20260901
+DTEND;VALUE=DATE:20261001
+SUMMARY:🟢 TCF Canada — GB Language Centre Septiembre 2026 ABIERTO
+DESCRIPTION:GB Language Centre — Sesiones de septiembre 2026 abiertas.\na
+ dmin@gblc.ca | 416-704-1940
+LOCATION:GB Language Centre — 716 Gordon Baker Rd\, Suite 211\, North Yor
+ k\, ON
+URL:https://gblc.ca/en/tests/tcf-canada
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,56 @@
+{
+  "AF Vancouver": {
+    "estado": "VERIFICAR",
+    "fechas": [],
+    "detalle": "Verificar manualmente",
+    "ts": "2026-06-15T22:08:08.078417"
+  },
+  "AF Toronto": {
+    "estado": "VERIFICAR",
+    "fechas": [],
+    "detalle": "Sin fechas detectadas — verificar manualmente",
+    "ts": "2026-06-15T22:08:15.272579"
+  },
+  "AF Ottawa": {
+    "estado": "VERIFICAR",
+    "fechas": [],
+    "detalle": "Sin señales claras — verificar manualmente",
+    "ts": "2026-06-15T22:08:19.835954"
+  },
+  "AF Montréal": {
+    "estado": "VERIFICAR",
+    "fechas": [],
+    "detalle": "Sin señales claras — verificar manualmente",
+    "ts": "2026-06-15T22:08:24.036506"
+  },
+  "AF Calgary": {
+    "estado": "VERIFICAR",
+    "fechas": [],
+    "detalle": "Sin señales claras — verificar manualmente",
+    "ts": "2026-06-15T22:08:28.211597"
+  },
+  "AF Edmonton": {
+    "estado": "VERIFICAR",
+    "fechas": [],
+    "detalle": "Sin señales claras — verificar manualmente",
+    "ts": "2026-06-15T22:08:32.993620"
+  },
+  "AF Halifax": {
+    "estado": "DISPONIBLE",
+    "fechas": [],
+    "detalle": "Indicadores de registro abierto detectados",
+    "ts": "2026-06-15T22:08:38.503721"
+  },
+  "Ashton Testing Services": {
+    "estado": "BLOQUEADO",
+    "fechas": [],
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
+    "ts": "2026-06-15T22:08:44.360444"
+  },
+  "GB Language Centre": {
+    "estado": "VERIFICAR",
+    "fechas": [],
+    "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
+    "ts": "2026-06-15T22:09:02.642277"
+  }
+}
