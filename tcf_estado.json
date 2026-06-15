@@ -3,54 +3,54 @@
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Verificar manualmente",
-    "ts": "2026-06-15T22:08:08.078417"
+    "ts": "2026-06-15T22:11:59.286987"
   },
   "AF Toronto": {
-    "estado": "VERIFICAR",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin fechas detectadas — verificar manualmente",
-    "ts": "2026-06-15T22:08:15.272579"
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
+    "ts": "2026-06-15T22:12:06.593912"
   },
   "AF Ottawa": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-15T22:08:19.835954"
+    "ts": "2026-06-15T22:12:24.960974"
   },
   "AF Montréal": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-15T22:08:24.036506"
+    "ts": "2026-06-15T22:12:29.137623"
   },
   "AF Calgary": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-15T22:08:28.211597"
+    "ts": "2026-06-15T22:12:33.314219"
   },
   "AF Edmonton": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-15T22:08:32.993620"
+    "ts": "2026-06-15T22:12:38.024248"
   },
   "AF Halifax": {
     "estado": "DISPONIBLE",
     "fechas": [],
     "detalle": "Indicadores de registro abierto detectados",
-    "ts": "2026-06-15T22:08:38.503721"
+    "ts": "2026-06-15T22:12:43.704566"
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-06-15T22:08:44.360444"
+    "ts": "2026-06-15T22:12:49.689553"
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-06-15T22:09:02.642277"
+    "ts": "2026-06-15T22:13:08.671233"
   }
 }
