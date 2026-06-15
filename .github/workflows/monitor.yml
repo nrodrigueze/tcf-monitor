@@ -2,13 +2,11 @@ name: TCF Canada Monitor
 
 on:
   schedule:
-    # Corre cada 2 horas (UTC). En PDT (Surrey BC) = 2h después.
     - cron: "0 */2 * * *"
   workflow_dispatch:
-    # Permite correrlo manualmente con un click desde github.com
 
 permissions:
-  contents: write   # necesario para hacer commit del ICS actualizado
+  contents: write
 
 jobs:
   check-availability:
