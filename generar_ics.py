@@ -349,27 +349,76 @@ def eventos_dinamicos(estado: dict, hoy: date) -> list[list[str]]:
                 resultado.append(ev)
             continue
 
-        # ── Resto de centros: un evento de estado general ──
-        desc_parts = [f"Estado: {est}", f"Revisión: {ts}"]
-        if detalle:
-            desc_parts.append(f"Detalle: {detalle}")
-        if fechas:
-            desc_parts.append("Fechas detectadas:\n" + "\n".join(f"  • {f}" for f in fechas))
-        if url:
-            desc_parts.append(f"Registrarse: {url}")
-        description = "\n".join(desc_parts)
+        # ── Resto de centros ──
+        # Si hay fechas específicas detectadas → un evento por fecha
+        # Si no → un evento general de estado para hoy
+        if fechas and est in ("DISPONIBLE", "PRÓXIMO", "AGOTADO"):
+            for i, fecha_txt in enumerate(fechas):
+                if est == "DISPONIBLE":
+                    emoji_ses, confirmado = "🟢", True
+                elif est == "PRÓXIMO":
+                    emoji_ses, confirmado = "🕐", False
+                else:
+                    emoji_ses, confirmado = "🔴", False
 
-        summary = f"{emoji} TCF Canada — {nombre} [{est}]"
-        ev = make_event(
-            uid=f"estado-{nombre.lower().replace(' ','-')}",
-            summary=summary,
-            dtstart=hoy,
-            dtend=hoy,
-            description=description,
-            url=url,
-            confirmed=(est == "DISPONIBLE"),
-        )
-        resultado.append(ev)
+                desc_parts = [
+                    f"Centro: {nombre}",
+                    f"Estado: {est}",
+                    f"Fecha: {fecha_txt}",
+                ]
+                if detalle:
+                    desc_parts.append(f"Detalle: {detalle}")
+                desc_parts += [f"Revisión: {ts}", f"Registrarse: {url}"]
+
+                d = parse_fecha_oncord(fecha_txt)
+                ev = make_event(
+                    uid=f"sesion-{nombre.lower().replace(' ','-')}-{i}-{fecha_txt.replace(' ','').replace(',','')}",
+                    summary=f"{emoji_ses} TCF Canada — {nombre} {fecha_txt} [{est}]",
+                    dtstart=d if d else hoy,
+                    dtend=d if d else hoy,
+                    description="\n".join(desc_parts),
+                    url=url,
+                    confirmed=confirmado,
+                )
+                resultado.append(ev)
+
+            # Si es PRÓXIMO también agregar evento de apertura de registro
+            if est == "PRÓXIMO" and detalle and "abre" in detalle.lower():
+                m_abre = re.search(
+                    r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4})",
+                    detalle, re.IGNORECASE
+                )
+                if m_abre:
+                    d_abre = parse_fecha_oncord(m_abre.group(1))
+                    if d_abre:
+                        ev = make_event(
+                            uid=f"registro-abre-{nombre.lower().replace(' ','-')}",
+                            summary=f"⏰ REGISTRO ABRE — {nombre}",
+                            dtstart=d_abre,
+                            dtend=d_abre,
+                            description=f"{detalle}\nRegistrarse: {url}",
+                            url=url,
+                            confirmed=True,
+                        )
+                        resultado.append(ev)
+        else:
+            # Evento general de estado (sin fechas específicas)
+            desc_parts = [f"Estado: {est}", f"Revisión: {ts}"]
+            if detalle:
+                desc_parts.append(f"Detalle: {detalle}")
+            if url:
+                desc_parts.append(f"Registrarse: {url}")
+
+            ev = make_event(
+                uid=f"estado-{nombre.lower().replace(' ','-')}",
+                summary=f"{emoji} TCF Canada — {nombre} [{est}]",
+                dtstart=hoy,
+                dtend=hoy,
+                description="\n".join(desc_parts),
+                url=url,
+                confirmed=(est == "DISPONIBLE"),
+            )
+            resultado.append(ev)
     return resultado
 
 
