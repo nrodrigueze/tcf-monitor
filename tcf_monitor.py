@@ -90,22 +90,8 @@ CENTROS = [
         "tipo": "toronto",
         "notas": "Q3 abierto desde mayo 20. Q4 abre ago 15. $390 CAD. 4 campus.",
     },
-    {
-        "nombre": "AF Ottawa",
-        "ciudad": "Ottawa, ON",
-        "url_check": "https://af.ca/ottawa/en/tests_et_examens/tcf/",
-        "url_registro": "https://af.ca/ottawa/en/tests_et_examens/tcf/",
-        "tipo": "ottawa",
-        "notas": "Sesiones mensuales. Sin sesiones 3–16 ago. Reanuda 18 ago.",
-    },
-    {
-        "nombre": "AF Montréal",
-        "ciudad": "Montréal, QC",
-        "url_check": "https://www.afmontreal.ca/tcf/",
-        "url_registro": "https://www.afmontreal.ca/tcf/",
-        "tipo": "montreal",
-        "notas": "Cupos muy limitados; se agotan en 24–48h. info@afmtl.ca",
-    },
+
+
     {
         "nombre": "AF Calgary",
         "ciudad": "Calgary, AB",
@@ -122,14 +108,7 @@ CENTROS = [
         "tipo": "edmonton",
         "notas": "$400 CAD. Registro mínimo 10 días antes.",
     },
-    {
-        "nombre": "AF Halifax",
-        "ciudad": "Halifax, NS",
-        "url_check": "https://afhalifax.ca/test-your-french/tcf/",
-        "url_registro": "https://afhalifax.ca/test-your-french/tcf/",
-        "tipo": "halifax",
-        "notas": "exam@afhalifax.ca · 902-580-8284",
-    },
+
     {
         "nombre": "Ashton Testing Services",
         "ciudad": "Vancouver, BC",
@@ -478,24 +457,6 @@ def check_generico(centro: dict,
     return r
 
 
-def check_ottawa(centro: dict) -> dict:
-    return check_generico(
-        centro,
-        kw_agotado=["no available dates", "no dates will be communicated", "complet"],
-        kw_disponible=["register now", "please click on", "choose another date",
-                       "registrations open", "click here to register"],
-    )
-
-
-def check_montreal(centro: dict) -> dict:
-    return check_generico(
-        centro,
-        kw_agotado=["complet", "sold out", "no hay"],
-        kw_disponible=["choisissez votre test", "inscrivez-vous", "s'inscrire",
-                       "disponibilités suivantes", "register"],
-    )
-
-
 def check_calgary(centro: dict) -> dict:
     return check_generico(
         centro,
@@ -513,16 +474,6 @@ def check_edmonton(centro: dict) -> dict:
         kw_disponible=["click here to fill", "fill out the form", "next sessions",
                        "register", "available"],
     )
-
-
-def check_halifax(centro: dict) -> dict:
-    return check_generico(
-        centro,
-        kw_agotado=["sold out", "no available dates", "no sessions"],
-        kw_disponible=["register for the tcf canada", "available dates",
-                       "book your tcf", "online store", "purchase"],
-    )
-
 
 
 def check_ashton(centro: dict) -> dict:
@@ -731,11 +682,9 @@ CHECKERS = {
     "vancouver": check_vancouver,
     "victoria":  check_victoria,
     "toronto":   check_toronto,
-    "ottawa":    check_ottawa,
-    "montreal":  check_montreal,
+
     "calgary":   check_calgary,
     "edmonton":  check_edmonton,
-    "halifax":   check_halifax,
     "ashton":    check_ashton,
     "gblc":      check_gblc,
 }

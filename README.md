@@ -1,123 +1,121 @@
 # TCF Canada Monitor 🇨🇦
 
-Revisa automáticamente la disponibilidad de cupos para el examen **TCF Canada** en los 9 centros acreditados de Canadá, cada 6 horas. Envía un email de alerta cuando detecta un cupo nuevo.
+Revisa automáticamente la disponibilidad de cupos para el examen **TCF Canada** en 7 centros acreditados de Canadá, cada 2 horas. Envía un email de alerta cuando detecta un cupo nuevo y mantiene un calendario `.ics` actualizado automáticamente.
 
 ## Centros monitoreados
 
 | Centro | Ciudad |
 |--------|--------|
 | Alliance Française Vancouver | Vancouver, BC |
+| Alliance Française Victoria | Victoria, BC |
 | Alliance Française Toronto | Toronto / N.York / Mississauga / Oakville, ON |
-| Alliance Française Ottawa | Ottawa, ON |
-| Alliance Française Montréal | Montréal, QC |
 | Alliance Française Calgary | Calgary, AB |
 | Alliance Française Edmonton | Edmonton, AB |
-| Alliance Française Halifax | Halifax, NS |
 | Ashton Testing Services | Vancouver, BC |
 | GB Language Centre | North York (Toronto), ON |
 
 ---
 
+## Calendario en vivo (ICS)
+
+El archivo `TCF_Canada_2026.ics` se actualiza automáticamente en cada corrida. Suscríbete con esta URL fija:
+
+```
+webcal://raw.githubusercontent.com/nrodrigueze/tcf-monitor/main/TCF_Canada_2026.ics
+```
+
+**iPhone:** Safari → pegar URL → "Subscribe to Calendar"  
+**Google Calendar:** Otros calendarios → `+` → Desde URL → pegar URL  
+
+El calendario incluye:
+- 🟢 Un evento por sesión disponible (en la fecha exacta del examen)
+- 🔴 Sesiones agotadas (para referencia)
+- 🕐 Sesiones próximas a abrir registro
+- ⏰ Fecha exacta en que abre el registro de cada sesión
+- 📅 Aperturas de registro trimestrales (Toronto, Vancouver)
+
+---
+
 ## Configuración (5 minutos)
 
-### Paso 1 — Crear el repositorio en GitHub
+### Paso 1 — Repositorio en GitHub
+El repositorio debe ser **público** para que la URL del ICS funcione sin autenticación.
 
-1. Ve a [github.com](https://github.com) e inicia sesión (o crea una cuenta gratis)
-2. Haz clic en **"New repository"** (botón verde arriba a la derecha)
-3. Nombre: `tcf-monitor`
-4. Marca **Private** (para que nadie más vea tus credenciales)
-5. Haz clic en **"Create repository"**
+### Paso 2 — Archivos requeridos
+```
+tcf-monitor/
+├── tcf_monitor.py          ← scraper principal
+├── generar_ics.py          ← generador de calendario
+├── README.md
+└── .github/
+    └── workflows/
+        └── monitor.yml     ← automatización cada 2 horas
+```
 
-### Paso 2 — Subir los archivos
-
-En la página de tu nuevo repositorio vacío:
-
-1. Haz clic en **"uploading an existing file"**
-2. Sube los dos archivos:
-   - `tcf_monitor.py`
-   - `.github/workflows/monitor.yml` ← primero crea la carpeta `.github/workflows/` manualmente en la interfaz
-3. Haz clic en **"Commit changes"**
-
-> **Alternativa más fácil:** usa [github.dev](https://github.dev) — abre el repo y arrastra los archivos.
-
-### Paso 3 — Configurar el email (Gmail App Password)
-
-1. Ve a tu cuenta Gmail → [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
+### Paso 3 — Gmail App Password
+1. Ve a [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
 2. Crea una App Password con nombre "TCF Monitor"
-3. Copia las 16 letras que te da (ej: `abcd efgh ijkl mnop`)
+3. Copia las 16 letras (sin espacios)
 
-### Paso 4 — Agregar los Secrets en GitHub
-
-En tu repositorio → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
-
-Agrega estos 3 secrets:
+### Paso 4 — Secrets en GitHub
+Settings → Secrets and variables → Actions → New repository secret
 
 | Nombre | Valor |
 |--------|-------|
-| `EMAIL_TO` | tu email donde quieres recibir alertas |
-| `EMAIL_FROM` | tu cuenta Gmail que manda el email |
-| `EMAIL_PASSWORD` | la App Password de 16 letras del paso anterior |
+| `EMAIL_TO` | email donde llegan las alertas |
+| `EMAIL_FROM` | cuenta Gmail que manda el email |
+| `EMAIL_PASSWORD` | App Password de 16 letras |
 
-### Paso 5 — Activar GitHub Actions
-
-1. Ve a la pestaña **Actions** en tu repositorio
-2. Si pide confirmación, haz clic en **"I understand my workflows, enable them"**
-3. Para probar inmediatamente: clic en **"TCF Canada Monitor"** → **"Run workflow"** → **"Run workflow"**
+### Paso 5 — Correr manualmente
+Actions → TCF Canada Monitor → Run workflow → Run workflow (verde)
 
 ---
 
 ## Horario de ejecución
 
-El monitor corre automáticamente 4 veces al día:
+Corre cada 2 horas automáticamente (UTC):
 
-| UTC | Hora PDT (Surrey, BC) |
-|-----|----------------------|
-| 00:00 | 17:00 (5 PM) |
-| 06:00 | 23:00 (11 PM) |
-| 12:00 | 05:00 (5 AM) |
-| 18:00 | 11:00 (11 AM) |
-
----
-
-## Cómo funciona
-
-- Cada 6 horas GitHub corre el script en sus servidores (gratis)
-- El script visita cada sitio y detecta si hay cupos disponibles
-- Si detecta un cupo **nuevo** (que no existía en la revisión anterior), manda un email de alerta inmediato
-- El log completo queda disponible en la pestaña **Actions** → selecciona el run → descarga el artefacto `tcf-log-N`
+| UTC | PDT (Surrey, BC) |
+|-----|-----------------|
+| 00:00 | 17:00 |
+| 02:00 | 19:00 |
+| 04:00 | 21:00 |
+| 06:00 | 23:00 |
+| 08:00 | 01:00 |
+| 10:00 | 03:00 |
+| 12:00 | 05:00 |
+| 14:00 | 07:00 |
+| 16:00 | 09:00 |
+| 18:00 | 11:00 |
+| 20:00 | 13:00 |
+| 22:00 | 15:00 |
 
 ---
 
 ## Email de alerta
 
-Cuando hay un cupo nuevo recibes un email como este:
+Solo se envía cuando un centro cambia de cualquier estado → **DISPONIBLE**:
 
 ```
 Asunto: 🚨 TCF Canada — ¡Cupo disponible!
 
 🎉 TCF Canada — Cupos detectados
 
-• Ashton Testing Services (Vancouver, BC)
+• AF Vancouver (Vancouver, BC)
   Estado: DISPONIBLE
-  Fechas: August 14th 9.00 am
-  👉 Registrarse ahora → https://ashtontesting.ca/tcf-canada-test/
-
-Revisión: 2026-06-15 18:00
+  Fechas: September 9, 2026
+  👉 Registrarse ahora → https://www.alliancefrancaise.ca/...
 ```
 
 ---
 
-## Ver resultados manualmente
+## Ver resultados
 
-1. Ve a tu repositorio en GitHub
-2. Pestaña **Actions**
-3. Haz clic en el último run de "TCF Canada Monitor"
-4. Descarga el artefacto **tcf-log-N** para ver el log completo y el estado JSON
+Actions → último run de "TCF Canada Monitor" → descargar artefacto `tcf-log-N`
 
 ---
 
 ## Costos
 
-**Gratis.** GitHub Actions incluye 2,000 minutos/mes en repositorios privados.
-Este workflow usa ~2 minutos por ejecución × 4 veces al día × 30 días = ~240 minutos/mes.
-Bien dentro del límite gratuito.
+**Gratis.** GitHub Actions incluye 2,000 min/mes en repos privados (o ilimitado en repos públicos).  
+Este workflow usa ~2 min × 12 veces/día × 30 días = ~720 min/mes.

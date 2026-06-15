@@ -138,19 +138,6 @@ EVENTOS_FIJOS = [
          url="https://www.alliancefrancaise.ca/products/ciep-tcf-canada-full-exam/",
          description="AF Vancouver — Registro para Oct–Dic 2026 abre en septiembre\nCosto: $390 CAD"),
 
-    # ── FEI CIERRE AGOSTO ──
-    dict(uid="fei-cierre-ago", summary="⛔ SIN EXÁMENES TCF — Cierre FEI (todos los centros)",
-         dtstart=date(2026,8,3), dtend=date(2026,8,16), confirmed=True,
-         location="",
-         url="https://www.france-education-international.fr",
-         description="France Éducation International (FEI) cierra del 3 al 16 de agosto 2026.\nNingún centro en Canadá puede ofrecer TCF durante este período.\nResultados de exámenes de finales de julio pueden llegar con retraso."),
-
-    dict(uid="ottawa-reanuda", summary="🟢 REANUDAN EXÁMENES TCF — AF Ottawa",
-         dtstart=date(2026,8,18), dtend=date(2026,8,18), confirmed=True,
-         location="Alliance Française Ottawa — 352 MacLaren Street, Ottawa ON",
-         url="https://af.ca/ottawa/en/tests_et_examens/tcf/",
-         description="AF Ottawa — Sesiones TCF reanudan después del cierre de verano de FEI."),
-
     # ── GB LANGUAGE CENTRE ──
     dict(uid="gblc-sep-open", summary="🟢 TCF Canada — GB Language Centre Septiembre 2026 ABIERTO",
          dtstart=date(2026,9,1), dtend=date(2026,9,30), confirmed=True,
@@ -174,11 +161,8 @@ EMOJIS_ESTADO = {
 URLS_REGISTRO = {
     "AF Vancouver":           "https://www.alliancefrancaise.ca/products/ciep-tcf-canada-full-exam/",
     "AF Toronto":             "https://www.alliance-francaise.ca/en/exams/tests/informations-about-tcf-canada/tcf-canada",
-    "AF Ottawa":              "https://af.ca/ottawa/en/tests_et_examens/tcf/",
-    "AF Montréal":            "https://www.afmontreal.ca/tcf/",
     "AF Calgary":             "https://www.afcalgary.ca/exams/tcf/registration-process/",
     "AF Edmonton":            "https://www.afedmonton.com/en/exams/tcf/",
-    "AF Halifax":             "https://afhalifax.ca/test-your-french/tcf/",
     "Ashton Testing Services":"https://ashtontesting.ca/tcf-canada-test/",
     "GB Language Centre":     "https://gblc.ca/en/tests/tcf-canada",
     "AF Victoria":            "https://www.afvictoria.ca/exams/tcf/",
