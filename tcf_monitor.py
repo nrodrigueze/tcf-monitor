@@ -818,6 +818,7 @@ def guardar_estado(resultados: list[dict]):
             "fechas": r.get("fechas", []),
             "detalle": r.get("detalle", ""),
             "ts": r.get("timestamp", ""),
+            "sesiones": r.get("sesiones", []),
         }
         for r in resultados
     }
