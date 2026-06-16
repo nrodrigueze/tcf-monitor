@@ -1,44 +1,49 @@
 {
   "AF Vancouver": {
-    "estado": "VERIFICAR",
-    "fechas": [],
-    "detalle": "Sin tabla de sesiones detectada — verificar manualmente",
-    "ts": "2026-06-16T14:52:36.542136"
+    "estado": "PRÓXIMO",
+    "fechas": [
+      "September 2, 2026",
+      "September 4, 2026",
+      "September 9, 2026",
+      "11 Sep 2026"
+    ],
+    "detalle": "Registro abre: Jun 17 2026 3:00pm",
+    "ts": "2026-06-16T16:45:23.857678"
   },
   "AF Victoria": {
-    "estado": "VERIFICAR",
+    "estado": "AGOTADO",
     "fechas": [],
-    "detalle": "Sin fechas detectadas — verificar en afvictoria.ca/exams/tcf/",
-    "ts": "2026-06-16T14:52:43.161396"
+    "detalle": "Sin sesiones verano 2026 — reanudan octubre 2026",
+    "ts": "2026-06-16T16:45:36.241070"
   },
   "AF Toronto": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-06-16T14:52:47.621445"
+    "ts": "2026-06-16T16:45:42.540107"
   },
   "AF Calgary": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-16T14:53:07.084872"
+    "ts": "2026-06-16T16:46:00.752468"
   },
   "AF Edmonton": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-16T14:53:11.514484"
+    "ts": "2026-06-16T16:46:05.376089"
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-06-16T14:53:16.697864"
+    "ts": "2026-06-16T16:46:10.877651"
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-06-16T14:53:34.929121"
+    "ts": "2026-06-16T16:46:29.128171"
   }
 }
