@@ -332,112 +332,85 @@ def _resultado_base(nombre, ciudad, url_r, url_c, notas) -> dict:
 def check_vancouver(centro: dict) -> dict:
     """
     AF Vancouver usa la plataforma Oncord con una tabla de sesiones que muestra:
-      - Exam name (TCF-Canada September 2, 2026)
+      - Exam (TCF-Canada September 2, 2026)
       - Schedules (Wed 02 Sep 2026 9am-4pm)
-      - Registration Dates (Jun 15 2026 12:00pm - Jun 30 2026 4:00pm)
+      - Registration Dates (Jun 17 2026 3:00pm - Jun 30 2026 4:00pm)  ← fecha de apertura real
       - Location, Spots left, Price, Bookings (Full / Opens in Xd Xh / Book Now)
-    Parseamos esa tabla para extraer sesiones disponibles, próximas y agotadas.
+
+    Solo nos interesa la fecha de APERTURA DE REGISTRO (columna "Registration Dates",
+    primer timestamp) para sesiones que aún no han abierto ("Opens in"). Si no podemos
+    extraer esa fecha con confianza, NO se genera nada — preferible vacío a un evento
+    inventado en el calendario.
     """
     r = _resultado_base(centro["nombre"], centro["ciudad"],
                         centro["url_registro"], centro["url_check"], centro["notas"])
-    # La tabla de sesiones se renderiza vía JS (Oncord) — usar navegador headless
     soup = fetch_page_js(centro["url_check"], espera_selector="table")
     if not soup:
-        # Fallback: HTML estático (no tendrá la tabla, pero evita fallo total)
         soup = fetch_page(centro["url_check"])
     if not soup:
         r["estado"] = "BLOQUEADO"
         r["detalle"] = "Sitio bloqueó el acceso. Verificar manualmente en alliancefrancaise.ca"
+        r["sesiones"] = []
         return r
 
-    texto = soup.get_text(" ", strip=True)
-    sesiones_disponibles = []
-    sesiones_proximas = []
-    sesiones_llenas = []
-    sesiones_raw = []   # lista de dicts con info completa para el ICS
+    aperturas = []  # solo sesiones con fecha de apertura de registro extraída con confianza
 
-    # La tabla Oncord tiene filas con clase "event-row" o similar
-    # Cada fila contiene: nombre examen, schedules, registration dates, spots, precio, botón
     filas = soup.find_all("tr")
-    if not filas:
-        # Fallback: buscar divs con clase de evento
-        filas = soup.find_all(class_=re.compile(r"event|session|row", re.I))
-
     for fila in filas:
+        celdas = fila.find_all("td")
+        if len(celdas) < 5:
+            continue
         texto_fila = fila.get_text(" ", strip=True)
         if "TCF" not in texto_fila.upper():
             continue
 
-        info = {"texto": texto_fila}
+        # Solo nos importan sesiones cuyo botón diga "Opens in" (aún no abrió)
+        boton_txt = celdas[-1].get_text(" ", strip=True) if celdas else ""
+        if not re.search(r"opens?\s+in", boton_txt, re.IGNORECASE):
+            continue  # FULL o Book Now — no generan evento de "apertura"
 
-        # Extraer fecha del examen (ej: "September 2, 2026" o "02 Sep 2026")
-        m_fecha = re.search(
-            r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}"
-            r"|\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{4})",
-            texto_fila, re.IGNORECASE
-        )
-        if m_fecha:
-            info["fecha_examen"] = m_fecha.group(1).strip()
-
-        # Extraer spots disponibles
-        m_spots = re.search(r"(\d+)\s*(?:spots?|cupos?|places?)\s*(?:left|remaining|available)?",
-                            texto_fila, re.IGNORECASE)
-        if m_spots:
-            info["spots"] = int(m_spots.group(1))
-
-        # Detectar estado del botón
-        texto_low = texto_fila.lower()
-        if "full" in texto_low and "spots" not in texto_low:
-            info["estado_boton"] = "FULL"
-            sesiones_llenas.append(info.get("fecha_examen", texto_fila[:40]))
-        elif re.search(r"opens?\s+in\s+\d+", texto_low):
-            m_opens = re.search(r"(opens?\s+in\s+[\d\w\s]+)", texto_fila, re.IGNORECASE)
-            info["estado_boton"] = m_opens.group(1).strip() if m_opens else "PRÓXIMO"
-            # Extraer fecha de apertura de registro
-            m_reg = re.search(
-                r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}"
-                r"\s+\d{1,2}:\d{2}(?:am|pm))",
-                texto_fila, re.IGNORECASE
+        # Columna "Registration Dates" — buscar la celda que tenga el patrón de fecha+hora
+        fecha_apertura = None
+        for celda in celdas:
+            txt = celda.get_text(" ", strip=True)
+            m = re.search(
+                r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2}\s+\d{4}\s+\d{1,2}:\d{2}\s*(?:am|pm))",
+                txt, re.IGNORECASE
             )
-            if m_reg:
-                info["abre_registro"] = m_reg.group(1).strip()
-            sesiones_proximas.append(info)
-        elif "book now" in texto_low or ("spots" in texto_low and info.get("spots", 0) > 0):
-            info["estado_boton"] = "DISPONIBLE"
-            sesiones_disponibles.append(info)
+            if m:
+                fecha_apertura = m.group(1).strip()
+                break
 
-        sesiones_raw.append(info)
+        if not fecha_apertura:
+            continue  # sin fecha confiable → se descarta, no se inventa nada
 
-    # Guardar sesiones completas para el ICS
-    r["sesiones"] = sesiones_raw
+        # Fecha del examen, solo para el texto descriptivo del evento (no crítico)
+        m_examen = re.search(
+            r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2}(?:st|nd|rd|th)?,?\s+\d{4})",
+            celdas[0].get_text(" ", strip=True), re.IGNORECASE
+        ) if celdas else None
+        fecha_examen = m_examen.group(1).strip() if m_examen else "?"
 
-    if sesiones_disponibles:
-        r["estado"] = "DISPONIBLE"
-        r["fechas"] = [s.get("fecha_examen", "?") for s in sesiones_disponibles]
-        spots_total = sum(s.get("spots", 0) for s in sesiones_disponibles)
-        r["detalle"] = f"{len(sesiones_disponibles)} sesión(es) disponible(s) — {spots_total} cupos totales"
-    elif sesiones_proximas:
+        m_spots = re.search(r"\b(\d+)\b", celdas[-3].get_text(" ", strip=True)) if len(celdas) >= 3 else None
+        spots = int(m_spots.group(1)) if m_spots else None
+
+        aperturas.append({
+            "fecha_examen": fecha_examen,
+            "abre_registro": fecha_apertura,
+            "spots": spots,
+        })
+
+    r["sesiones"] = aperturas
+
+    if aperturas:
         r["estado"] = "PRÓXIMO"
-        proxima = sesiones_proximas[0]
-        abre = proxima.get("abre_registro", proxima.get("estado_boton", "próximamente"))
-        r["fechas"] = [s.get("fecha_examen", "?") for s in sesiones_proximas]
-        r["detalle"] = f"Registro abre: {abre}"
-    elif sesiones_llenas:
-        r["estado"] = "AGOTADO"
-        r["fechas"] = sesiones_llenas[:5]
-        r["detalle"] = f"{len(sesiones_llenas)} sesión(es) FULL"
+        r["fechas"] = [a["fecha_examen"] for a in aperturas]
+        r["detalle"] = f"{len(aperturas)} apertura(s) de registro detectada(s)"
     else:
-        # Fallback a texto plano si no se parseó tabla
-        if "sold out" in texto.lower() or "full" in texto.lower():
-            r["estado"] = "AGOTADO"
-            r["detalle"] = "Sesiones marcadas como FULL/SOLD OUT"
-        elif "opens in" in texto.lower():
-            r["estado"] = "PRÓXIMO"
-            m = re.search(r"opens?\s+in\s+([\d\w\s]+)", texto, re.IGNORECASE)
-            r["detalle"] = f"Registro abre en: {m.group(1).strip() if m else 'próximamente'}"
-        else:
-            r["estado"] = "VERIFICAR"
-            r["detalle"] = "Sin tabla de sesiones detectada — verificar manualmente"
+        # Nada que reportar — ni se marca VERIFICAR ni BLOQUEADO con ruido.
+        # Puede ser: todo FULL, todo ya abierto (Book Now), o no se pudo parsear.
+        r["estado"] = "SIN_EVENTO"
+        r["detalle"] = "Sin aperturas de registro pendientes detectadas"
 
     return r
 
@@ -640,8 +613,9 @@ def check_gblc(centro: dict) -> dict:
 def check_victoria(centro: dict) -> dict:
     """
     AF Victoria usa la misma plataforma Oncord que Vancouver.
-    Parsea tabla de sesiones: si no hay fechas = agotado.
-    Nota: sin sesiones verano 2026, reanudan octubre 2026.
+    Misma lógica estricta: solo se reporta una sesión si se extrae con confianza
+    su fecha de apertura de registro ("Opens in" + columna Registration Dates).
+    Si no hay nada así, no se genera ningún evento (SIN_EVENTO).
     """
     r = _resultado_base(centro["nombre"], centro["ciudad"],
                         centro["url_registro"], centro["url_check"], centro["notas"])
@@ -651,88 +625,61 @@ def check_victoria(centro: dict) -> dict:
     if not soup:
         r["estado"] = "BLOQUEADO"
         r["detalle"] = "Sitio bloqueó el acceso. Verificar en afvictoria.ca/exams/tcf/"
+        r["sesiones"] = []
         return r
 
-    texto = soup.get_text(" ", strip=True)
-    texto_low = texto.lower()
-    sesiones_raw = []
-
-    # Buscar tabla Oncord
+    aperturas = []
     filas = soup.find_all("tr")
-    sesiones_disponibles = []
-    sesiones_proximas = []
-    sesiones_llenas = []
-
     for fila in filas:
+        celdas = fila.find_all("td")
+        if len(celdas) < 5:
+            continue
         texto_fila = fila.get_text(" ", strip=True)
         if "TCF" not in texto_fila.upper():
             continue
-        info = {"texto": texto_fila}
 
-        m_fecha = re.search(
-            r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}"
-            r"|\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{4})",
-            texto_fila, re.IGNORECASE
-        )
-        if m_fecha:
-            info["fecha_examen"] = m_fecha.group(1).strip()
+        boton_txt = celdas[-1].get_text(" ", strip=True) if celdas else ""
+        if not re.search(r"opens?\s+in", boton_txt, re.IGNORECASE):
+            continue
 
-        m_spots = re.search(r"(\d+)\s*(?:spots?|cupos?|places?)\s*(?:left|remaining|available)?",
-                            texto_fila, re.IGNORECASE)
-        if m_spots:
-            info["spots"] = int(m_spots.group(1))
-
-        texto_fila_low = texto_fila.lower()
-        if "full" in texto_fila_low and "spots" not in texto_fila_low:
-            info["estado_boton"] = "FULL"
-            sesiones_llenas.append(info.get("fecha_examen", texto_fila[:40]))
-        elif re.search(r"opens?\s+in\s+\d+", texto_fila_low):
-            m_opens = re.search(r"(opens?\s+in\s+[\d\w\s]+)", texto_fila, re.IGNORECASE)
-            info["estado_boton"] = m_opens.group(1).strip() if m_opens else "PRÓXIMO"
-            m_reg = re.search(
-                r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4}\s+\d{1,2}:\d{2}(?:am|pm))",
-                texto_fila, re.IGNORECASE
+        fecha_apertura = None
+        for celda in celdas:
+            txt = celda.get_text(" ", strip=True)
+            m = re.search(
+                r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2}\s+\d{4}\s+\d{1,2}:\d{2}\s*(?:am|pm))",
+                txt, re.IGNORECASE
             )
-            if m_reg:
-                info["abre_registro"] = m_reg.group(1).strip()
-            sesiones_proximas.append(info)
-        elif "book now" in texto_fila_low or ("spots" in texto_fila_low and info.get("spots", 0) > 0):
-            info["estado_boton"] = "DISPONIBLE"
-            sesiones_disponibles.append(info)
+            if m:
+                fecha_apertura = m.group(1).strip()
+                break
 
-        sesiones_raw.append(info)
+        if not fecha_apertura:
+            continue
 
-    r["sesiones"] = sesiones_raw
+        m_examen = re.search(
+            r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2}(?:st|nd|rd|th)?,?\s+\d{4})",
+            celdas[0].get_text(" ", strip=True), re.IGNORECASE
+        ) if celdas else None
+        fecha_examen = m_examen.group(1).strip() if m_examen else "?"
 
-    if sesiones_disponibles:
-        r["estado"] = "DISPONIBLE"
-        r["fechas"] = [s.get("fecha_examen", "?") for s in sesiones_disponibles]
-        spots_total = sum(s.get("spots", 0) for s in sesiones_disponibles)
-        r["detalle"] = f"{len(sesiones_disponibles)} sesión(es) disponible(s) — {spots_total} cupos"
-    elif sesiones_proximas:
+        m_spots = re.search(r"\b(\d+)\b", celdas[-3].get_text(" ", strip=True)) if len(celdas) >= 3 else None
+        spots = int(m_spots.group(1)) if m_spots else None
+
+        aperturas.append({
+            "fecha_examen": fecha_examen,
+            "abre_registro": fecha_apertura,
+            "spots": spots,
+        })
+
+    r["sesiones"] = aperturas
+
+    if aperturas:
         r["estado"] = "PRÓXIMO"
-        proxima = sesiones_proximas[0]
-        abre = proxima.get("abre_registro", proxima.get("estado_boton", "próximamente"))
-        r["fechas"] = [s.get("fecha_examen", "?") for s in sesiones_proximas]
-        r["detalle"] = f"Registro abre: {abre}"
-    elif sesiones_llenas:
-        r["estado"] = "AGOTADO"
-        r["fechas"] = sesiones_llenas[:5]
-        r["detalle"] = f"{len(sesiones_llenas)} sesión(es) FULL"
+        r["fechas"] = [a["fecha_examen"] for a in aperturas]
+        r["detalle"] = f"{len(aperturas)} apertura(s) de registro detectada(s)"
     else:
-        # Fallback texto plano
-        kw_sold = ["sold out", "no dates available", "check back", "check our website regularly"]
-        kw_summer = ["no tcf-canada session will be held during summer", "resume in october",
-                     "check back on this page", "sold out at the moment"]
-        if any(k in texto_low for k in kw_summer):
-            r["estado"] = "AGOTADO"
-            r["detalle"] = "Sin sesiones verano 2026 — reanudan octubre 2026"
-        elif any(k in texto_low for k in kw_sold):
-            r["estado"] = "AGOTADO"
-            r["detalle"] = "Agotado — revisar regularmente"
-        else:
-            r["estado"] = "VERIFICAR"
-            r["detalle"] = "Sin fechas detectadas — verificar en afvictoria.ca/exams/tcf/"
+        r["estado"] = "SIN_EVENTO"
+        r["detalle"] = "Sin aperturas de registro pendientes detectadas"
 
     return r
 

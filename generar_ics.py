@@ -1,10 +1,21 @@
 #!/usr/bin/env python3
 """
-Genera TCF_Canada_2026.ics con el estado actual de cada centro.
-Lee tcf_estado.json (producido por tcf_monitor.py) y combina:
-  - Fechas fijas conocidas (apertura de registro, cierres FEI, sesiones Ashton)
-  - Estado dinámico de cada centro en tiempo real
-Se corre automáticamente por GitHub Actions después de cada revisión.
+Genera TCF_Canada_2026.ics — SOLO eventos de apertura de registro.
+
+Filosofía: el calendario debe estar vacío de ruido. Un evento se crea
+ÚNICAMENTE cuando tcf_monitor.py extrajo, con confianza, la fecha y hora
+exacta en que abre el registro de una sesión específica (columna
+"Registration Dates" de la tabla Oncord, o equivalente en otros centros).
+
+Si un centro no tiene ninguna apertura de registro detectada (sea porque
+está bloqueado, todo está FULL, todo ya está abierto para reservar, o el
+scraper no pudo parsear la tabla con certeza) — NO se genera ningún evento
+para ese centro. Nada de "VERIFICAR" ni "BLOQUEADO" en el calendario.
+
+Cada evento:
+  - Ocurre a la hora EXACTA de apertura (no todo el día)
+  - Tiene un VALARM 30 minutos antes
+  - Incluye el link directo para registrarse
 """
 
 import json
@@ -16,14 +27,11 @@ from pathlib import Path
 # ─────────────────────────────────────────────────────────
 #  HELPERS ICS
 # ─────────────────────────────────────────────────────────
-def ics_date(d: date) -> str:
-    return d.strftime("%Y%m%d")
-
 def ics_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
 def fold(line: str) -> str:
-    """RFC 5545: líneas > 75 chars se parten con CRLF + espacio."""
+    """RFC 5545: líneas > 75 octetos se parten con CRLF + espacio."""
     result, chunk = [], line
     while len(chunk.encode("utf-8")) > 75:
         cut = 75
@@ -37,373 +45,172 @@ def fold(line: str) -> str:
 def escape(s: str) -> str:
     return s.replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,").replace("\n", "\\n")
 
-def make_event(
+def make_event_datetime(
     uid: str,
     summary: str,
-    dtstart: date,
-    dtend: date,
+    dt: datetime,
     description: str,
-    location: str = "",
     url: str = "",
-    all_day: bool = True,
-    confirmed: bool = True,
+    location: str = "",
+    duration_minutes: int = 30,
+    alarm_minutes_before: int = 30,
 ) -> list[str]:
+    """
+    Evento puntual (no de día completo) a una hora exacta, con recordatorio.
+    dt debe estar en hora local de Vancouver (America/Vancouver) — se asume
+    naive y se etiqueta con TZID para que cada calendario lo ajuste bien.
+    """
     now = ics_now()
+    dtstart = dt.strftime("%Y%m%dT%H%M%S")
+    dtend = (dt + timedelta(minutes=duration_minutes)).strftime("%Y%m%dT%H%M%S")
+
     lines = [
         "BEGIN:VEVENT",
         f"UID:{uid}@tcf-monitor-nrodrigueze",
         f"DTSTAMP:{now}",
-        f"LAST-MODIFIED:{now}",
+        f"DTSTART;TZID=America/Vancouver:{dtstart}",
+        f"DTEND;TZID=America/Vancouver:{dtend}",
+        fold(f"SUMMARY:{escape(summary)}"),
     ]
-    if all_day:
-        lines.append(f"DTSTART;VALUE=DATE:{ics_date(dtstart)}")
-        lines.append(f"DTEND;VALUE=DATE:{ics_date(dtend + timedelta(days=1))}")
-    else:
-        lines.append(f"DTSTART;VALUE=DATE:{ics_date(dtstart)}")
-        lines.append(f"DTEND;VALUE=DATE:{ics_date(dtend + timedelta(days=1))}")
-
-    lines.append(fold(f"SUMMARY:{escape(summary)}"))
-
     if description:
         lines.append(fold(f"DESCRIPTION:{escape(description)}"))
     if location:
         lines.append(fold(f"LOCATION:{escape(location)}"))
     if url:
         lines.append(fold(f"URL:{url}"))
+    lines.append("STATUS:CONFIRMED")
 
-    lines.append(f"STATUS:{'CONFIRMED' if confirmed else 'TENTATIVE'}")
+    # Recordatorio antes de la apertura
+    lines += [
+        "BEGIN:VALARM",
+        "ACTION:DISPLAY",
+        fold(f"DESCRIPTION:{escape(summary)}"),
+        f"TRIGGER:-PT{alarm_minutes_before}M",
+        "END:VALARM",
+    ]
+
     lines.append("END:VEVENT")
     return lines
 
 
 # ─────────────────────────────────────────────────────────
-#  FECHAS FIJAS 2026
+#  PARSEO DE FECHA+HORA  ("Jun 17 2026 3:00pm")
 # ─────────────────────────────────────────────────────────
-EVENTOS_FIJOS = [
-
-    # ── ASHTON TESTING SERVICES — sesiones julio (todas FULL por ahora) ──
-    dict(uid="ashton-jul05", summary="🔴 TCF Canada — Ashton Vancouver 9:00 AM [FULL]",
-         dtstart=date(2026,7,5), dtend=date(2026,7,5), confirmed=True,
-         location="410-1190 Melville Street, Vancouver, BC V6E 3W1",
-         url="https://ashtontesting.ca/tcf-canada-test/",
-         description="Ashton Testing Services — Sesión COMPLETA\nHora: 9:00 AM\nCosto: $410 CAD\ntestcentre@ashtontesting.ca | (604) 628-5783"),
-
-    dict(uid="ashton-jul12", summary="🔴 TCF Canada — Ashton Vancouver 9:00 AM [FULL]",
-         dtstart=date(2026,7,12), dtend=date(2026,7,12), confirmed=True,
-         location="410-1190 Melville Street, Vancouver, BC V6E 3W1",
-         url="https://ashtontesting.ca/tcf-canada-test/",
-         description="Ashton Testing Services — Sesión COMPLETA\nHora: 9:00 AM\nCosto: $410 CAD"),
-
-    dict(uid="ashton-jul17", summary="🔴 TCF Canada — Ashton Vancouver 5:00 PM [FULL]",
-         dtstart=date(2026,7,17), dtend=date(2026,7,17), confirmed=True,
-         location="410-1190 Melville Street, Vancouver, BC V6E 3W1",
-         url="https://ashtontesting.ca/tcf-canada-test/",
-         description="Ashton Testing Services — Sesión COMPLETA\nHora: 5:00 PM\nCosto: $410 CAD"),
-
-    dict(uid="ashton-jul24", summary="🔴 TCF Canada — Ashton Vancouver 5:00 PM [FULL]",
-         dtstart=date(2026,7,24), dtend=date(2026,7,24), confirmed=True,
-         location="410-1190 Melville Street, Vancouver, BC V6E 3W1",
-         url="https://ashtontesting.ca/tcf-canada-test/",
-         description="Ashton Testing Services — Sesión COMPLETA\nHora: 5:00 PM\nCosto: $410 CAD"),
-
-    dict(uid="ashton-jul30", summary="🔴 TCF Canada — Ashton Vancouver 5:00 PM [FULL]",
-         dtstart=date(2026,7,30), dtend=date(2026,7,30), confirmed=True,
-         location="410-1190 Melville Street, Vancouver, BC V6E 3W1",
-         url="https://ashtontesting.ca/tcf-canada-test/",
-         description="Ashton Testing Services — Sesión COMPLETA\nHora: 5:00 PM\nCosto: $410 CAD"),
-
-    # ── AF TORONTO — aperturas de registro ──
-    dict(uid="toronto-q3-open", summary="📅 REGISTRO ABRE — AF Toronto Q3 (Jul–Sep 2026) 10:00 AM",
-         dtstart=date(2026,5,20), dtend=date(2026,5,20), confirmed=True,
-         location="Alliance Française Toronto — 4 campus en GTA",
-         url="https://www.alliance-francaise.ca/en/exams/tests/informations-about-tcf-canada/tcf-canada",
-         description="AF Toronto — Apertura de registro Q3 (Julio–Septiembre 2026)\nHora: 10:00 AM\nCosto: $390 CAD\nFormatos: E-TCF y P-TCF\nCampus: Downtown Toronto, North York, Mississauga, Oakville"),
-
-    dict(uid="toronto-q4-open", summary="📅 REGISTRO ABRE — AF Toronto Q4 (Oct–Dic 2026) 10:00 AM",
-         dtstart=date(2026,8,15), dtend=date(2026,8,15), confirmed=True,
-         location="Alliance Française Toronto — 4 campus en GTA",
-         url="https://www.alliance-francaise.ca/en/exams/tests/informations-about-tcf-canada/tcf-canada",
-         description="AF Toronto — Apertura de registro Q4 (Octubre–Diciembre 2026)\nHora: 10:00 AM\nCosto: $390 CAD"),
-
-    # ── AF VANCOUVER — aperturas de registro ──
-    dict(uid="van-sep-open", summary="📅 REGISTRO ABRE — AF Vancouver Septiembre 2026",
-         dtstart=date(2026,6,15), dtend=date(2026,6,15), confirmed=False,
-         location="Alliance Française Vancouver — 6161 Cambie Street, Vancouver, BC",
-         url="https://www.alliancefrancaise.ca/products/ciep-tcf-canada-full-exam/",
-         description="AF Vancouver — Registro para septiembre 2026 abre a mediados de junio\nCosto: $390 CAD\ntef.tcf@alliancefrancaise.ca | (604) 327-0201"),
-
-    dict(uid="van-q4-open", summary="📅 REGISTRO ABRE — AF Vancouver Oct–Dic 2026",
-         dtstart=date(2026,9,1), dtend=date(2026,9,1), confirmed=False,
-         location="Alliance Française Vancouver — 6161 Cambie Street, Vancouver, BC",
-         url="https://www.alliancefrancaise.ca/products/ciep-tcf-canada-full-exam/",
-         description="AF Vancouver — Registro para Oct–Dic 2026 abre en septiembre\nCosto: $390 CAD"),
-
-    # ── GB LANGUAGE CENTRE ──
-    dict(uid="gblc-sep-open", summary="🟢 TCF Canada — GB Language Centre Septiembre 2026 ABIERTO",
-         dtstart=date(2026,9,1), dtend=date(2026,9,30), confirmed=True,
-         location="GB Language Centre — 716 Gordon Baker Rd, Suite 211, North York, ON",
-         url="https://gblc.ca/en/tests/tcf-canada",
-         description="GB Language Centre — Sesiones de septiembre 2026 abiertas.\nadmin@gblc.ca | 416-704-1940"),
-]
-
-# ─────────────────────────────────────────────────────────
-#  EVENTOS DINÁMICOS desde tcf_estado.json
-# ─────────────────────────────────────────────────────────
-EMOJIS_ESTADO = {
-    "DISPONIBLE": "🟢",
-    "AGOTADO":    "🔴",
-    "PRÓXIMO":    "🕐",
-    "VERIFICAR":  "⚠️",
-    "BLOQUEADO":  "🔒",
-    "ERROR":      "💤",
+_MESES = {
+    "jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,
+    "jul":7,"aug":8,"sep":9,"oct":10,"nov":11,"dec":12,
+    "january":1,"february":2,"march":3,"april":4,"june":6,"july":7,
+    "august":8,"september":9,"october":10,"november":11,"december":12,
 }
 
+def parse_apertura(texto: str) -> datetime | None:
+    """
+    Parsea 'Jun 17 2026 3:00pm' o 'June 17, 2026 3:00 pm' a datetime naive
+    (hora local del centro, asumida Pacific salvo que se indique otra).
+    Retorna None si no logra parsear con confianza — nunca inventa una fecha.
+    """
+    if not texto:
+        return None
+    m = re.search(
+        r"(\w+)\.?\s+(\d{1,2}),?\s+(\d{4})\s+(\d{1,2}):(\d{2})\s*(am|pm)",
+        texto.strip(), re.IGNORECASE
+    )
+    if not m:
+        return None
+    mes_txt, dia, anio, hora, minuto, ampm = m.groups()
+    mes = _MESES.get(mes_txt.lower()[:3])
+    if not mes:
+        return None
+    hora = int(hora)
+    if ampm.lower() == "pm" and hora != 12:
+        hora += 12
+    elif ampm.lower() == "am" and hora == 12:
+        hora = 0
+    try:
+        return datetime(int(anio), mes, int(dia), hora, int(minuto))
+    except ValueError:
+        return None
+
+
+# ─────────────────────────────────────────────────────────
+#  URLs de registro por centro (para el link en el evento)
+# ─────────────────────────────────────────────────────────
 URLS_REGISTRO = {
-    "AF Vancouver":           "https://www.alliancefrancaise.ca/products/ciep-tcf-canada-full-exam/",
-    "AF Toronto":             "https://www.alliance-francaise.ca/en/exams/tests/informations-about-tcf-canada/tcf-canada",
-    "AF Calgary":             "https://www.afcalgary.ca/exams/tcf/registration-process/",
-    "AF Edmonton":            "https://www.afedmonton.com/en/exams/tcf/",
-    "Ashton Testing Services":"https://ashtontesting.ca/tcf-canada-test/",
-    "GB Language Centre":     "https://gblc.ca/en/tests/tcf-canada",
-    "AF Victoria":            "https://www.afvictoria.ca/exams/tcf/",
+    "AF Vancouver":            "https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/",
+    "AF Victoria":             "https://www.afvictoria.ca/exams/tcf/",
+    "AF Toronto":              "https://www.alliance-francaise.ca/en/exams/tests/informations-about-tcf-canada/tcf-canada",
+    "AF Calgary":              "https://www.afcalgary.ca/exams/tcf/registration-process/",
+    "AF Edmonton":             "https://www.afedmonton.com/en/exams/tcf/",
+    "Ashton Testing Services": "https://ashtontesting.ca/tcf-canada-test/",
+    "GB Language Centre":      "https://gblc.ca/en/tests/tcf-canada",
 }
 
-def parse_fecha_oncord(texto_fecha: str) -> date | None:
-    """Parsea fechas como 'September 2, 2026' o '02 Sep 2026' a date."""
-    from calendar import month_abbr
-    meses = {m.lower(): i for i, m in enumerate(month_abbr) if m}
-    meses_full = {
-        "january":1,"february":2,"march":3,"april":4,"may":5,"june":6,
-        "july":7,"august":8,"september":9,"october":10,"november":11,"december":12
-    }
-    meses.update(meses_full)
-
-    # "September 2, 2026" o "September 9, 2026"
-    m = re.match(r"(\w+)\s+(\d{1,2}),?\s+(\d{4})", texto_fecha.strip(), re.IGNORECASE)
-    if m:
-        mes = meses.get(m.group(1).lower()[:3]) or meses.get(m.group(1).lower())
-        if mes:
-            try:
-                return date(int(m.group(3)), mes, int(m.group(2)))
-            except Exception:
-                pass
-
-    # "02 Sep 2026"
-    m = re.match(r"(\d{1,2})\s+(\w+)\s+(\d{4})", texto_fecha.strip(), re.IGNORECASE)
-    if m:
-        mes = meses.get(m.group(2).lower()[:3]) or meses.get(m.group(2).lower())
-        if mes:
-            try:
-                return date(int(m.group(3)), mes, int(m.group(1)))
-            except Exception:
-                pass
-    return None
+UBICACIONES = {
+    "AF Vancouver": "6161 Cambie Street, Vancouver, BC",
+    "AF Victoria":  "1B-1218 Langley Street, Victoria, BC",
+    "AF Toronto":   "Alliance Française Toronto — 4 campus en GTA",
+    "AF Calgary":   "Alliance Française Calgary",
+    "AF Edmonton":  "Alliance Française Edmonton",
+    "Ashton Testing Services": "410-1190 Melville Street, Vancouver, BC",
+    "GB Language Centre": "716 Gordon Baker Rd, Suite 211, North York, ON",
+}
 
 
-def eventos_dinamicos(estado: dict, hoy: date) -> list[list[str]]:
-    """Genera eventos por centro. Para Vancouver, un evento por sesión individual."""
-    resultado = []
+# ─────────────────────────────────────────────────────────
+#  EVENTOS A PARTIR DEL ESTADO
+# ─────────────────────────────────────────────────────────
+def eventos_desde_estado(estado: dict) -> list[list[str]]:
+    """
+    Recorre cada centro. Solo genera evento por sesión cuya fecha de
+    apertura de registro se haya extraído con éxito (campo 'abre_registro'
+    dentro de r['sesiones']). Todo lo demás se ignora silenciosamente.
+    """
+    eventos = []
     for nombre, datos in estado.items():
-        est = datos.get("estado", "VERIFICAR")
-        fechas = datos.get("fechas", [])
-        detalle = datos.get("detalle", "")
-        ts = datos.get("ts", "")[:16].replace("T", " ")
-        emoji = EMOJIS_ESTADO.get(est, "❓")
-        url = URLS_REGISTRO.get(nombre, "")
         sesiones = datos.get("sesiones", [])
+        if not sesiones:
+            continue  # nada confiable para este centro — no se genera ruido
 
-        # ── Vancouver: evento individual por sesión ──
-        if nombre == "AF Vancouver" and sesiones:
-            for i, ses in enumerate(sesiones):
-                fecha_txt = ses.get("fecha_examen", "")
-                estado_boton = ses.get("estado_boton", "VERIFICAR")
-                spots = ses.get("spots", 0)
-                abre = ses.get("abre_registro", "")
+        url = URLS_REGISTRO.get(nombre, "")
+        location = UBICACIONES.get(nombre, "")
 
-                if estado_boton == "FULL":
-                    emoji_ses = "🔴"
-                    est_ses = "FULL"
-                    confirmado = False
-                elif estado_boton == "DISPONIBLE":
-                    emoji_ses = "🟢"
-                    est_ses = "DISPONIBLE"
-                    confirmado = True
-                else:
-                    emoji_ses = "🕐"
-                    est_ses = estado_boton
-                    confirmado = False
+        for i, ses in enumerate(sesiones):
+            abre_txt = ses.get("abre_registro", "")
+            dt_abre = parse_apertura(abre_txt)
+            if not dt_abre:
+                continue  # sin fecha parseable con confianza — se descarta
 
-                summary = f"{emoji_ses} TCF Canada — AF Vancouver {fecha_txt} [{est_ses}]"
-                desc_parts = [
-                    f"Centro: Alliance Française Vancouver",
-                    f"Examen: {fecha_txt}",
-                    f"Estado: {est_ses}",
-                ]
-                if spots:
-                    desc_parts.append(f"Cupos disponibles: {spots}")
-                if abre:
-                    desc_parts.append(f"Registro abre: {abre}")
-                desc_parts += [
-                    "Precio: $390 CAD",
-                    f"Revisión: {ts}",
-                    f"Registrarse: {url}",
-                ]
+            fecha_examen = ses.get("fecha_examen", "")
+            spots = ses.get("spots")
 
-                # Intentar parsear la fecha para el evento de calendario
-                d = parse_fecha_oncord(fecha_txt) if fecha_txt else None
-                ev_date = d if d else hoy
+            summary = f"⏰ Registro abre — {nombre}"
+            if fecha_examen and fecha_examen != "?":
+                summary += f" (examen {fecha_examen})"
 
-                ev = make_event(
-                    uid=f"van-sesion-{i}-{fecha_txt.replace(' ','').replace(',','')}",
-                    summary=summary,
-                    dtstart=ev_date,
-                    dtend=ev_date,
-                    description="\n".join(desc_parts),
-                    location="6161 Cambie Street, Vancouver, BC V5Z 3B2",
-                    url=url,
-                    confirmed=confirmado,
-                )
-                resultado.append(ev)
-
-            # Agregar también evento de apertura de registro para sesiones PRÓXIMAS
-            for ses in sesiones:
-                if ses.get("abre_registro") and ses.get("estado_boton", "") not in ("FULL", "DISPONIBLE"):
-                    abre_txt = ses.get("abre_registro", "")
-                    fecha_exam = ses.get("fecha_examen", "")
-                    # Parsear fecha de apertura
-                    d_abre = None
-                    m_abre = re.search(
-                        r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4})",
-                        abre_txt, re.IGNORECASE
-                    )
-                    if m_abre:
-                        d_abre = parse_fecha_oncord(m_abre.group(1))
-
-                    if d_abre:
-                        ev = make_event(
-                            uid=f"van-registro-abre-{fecha_exam.replace(' ','').replace(',','')}",
-                            summary=f"⏰ REGISTRO ABRE — AF Vancouver {fecha_exam}",
-                            dtstart=d_abre,
-                            dtend=d_abre,
-                            description=f"Apertura de registro para TCF Canada {fecha_exam}\nHora: {abre_txt}\nRegistrarse: {url}",
-                            location="Alliance Française Vancouver",
-                            url=url,
-                            confirmed=True,
-                        )
-                        resultado.append(ev)
-            continue  # siguiente centro
-
-        # ── Victoria: misma lógica que Vancouver si tiene sesiones ──
-        if nombre == "AF Victoria" and sesiones:
-            for i, ses in enumerate(sesiones):
-                fecha_txt = ses.get("fecha_examen", "")
-                estado_boton = ses.get("estado_boton", "VERIFICAR")
-                spots = ses.get("spots", 0)
-                abre = ses.get("abre_registro", "")
-
-                if estado_boton == "FULL":
-                    emoji_ses, est_ses, confirmado = "🔴", "FULL", False
-                elif estado_boton == "DISPONIBLE":
-                    emoji_ses, est_ses, confirmado = "🟢", "DISPONIBLE", True
-                else:
-                    emoji_ses, est_ses, confirmado = "🕐", estado_boton, False
-
-                desc_parts = [
-                    "Centro: Alliance Française Victoria",
-                    f"Examen: {fecha_txt}",
-                    f"Estado: {est_ses}",
-                ]
-                if spots:
-                    desc_parts.append(f"Cupos disponibles: {spots}")
-                if abre:
-                    desc_parts.append(f"Registro abre: {abre}")
-                desc_parts += [f"Revisión: {ts}", f"Registrarse: {url}"]
-
-                d = parse_fecha_oncord(fecha_txt) if fecha_txt else None
-                ev = make_event(
-                    uid=f"vic-sesion-{i}-{fecha_txt.replace(' ','').replace(',','')}",
-                    summary=f"{emoji_ses} TCF Canada — AF Victoria {fecha_txt} [{est_ses}]",
-                    dtstart=d if d else hoy,
-                    dtend=d if d else hoy,
-                    description="\n".join(desc_parts),
-                    location="1B-1218 Langley Street, Victoria, BC",
-                    url=url,
-                    confirmed=confirmado,
-                )
-                resultado.append(ev)
-            continue
-
-        # ── Resto de centros ──
-        # Si hay fechas específicas detectadas → un evento por fecha
-        # Si no → un evento general de estado para hoy
-        if fechas and est in ("DISPONIBLE", "PRÓXIMO", "AGOTADO"):
-            for i, fecha_txt in enumerate(fechas):
-                if est == "DISPONIBLE":
-                    emoji_ses, confirmado = "🟢", True
-                elif est == "PRÓXIMO":
-                    emoji_ses, confirmado = "🕐", False
-                else:
-                    emoji_ses, confirmado = "🔴", False
-
-                desc_parts = [
-                    f"Centro: {nombre}",
-                    f"Estado: {est}",
-                    f"Fecha: {fecha_txt}",
-                ]
-                if detalle:
-                    desc_parts.append(f"Detalle: {detalle}")
-                desc_parts += [f"Revisión: {ts}", f"Registrarse: {url}"]
-
-                d = parse_fecha_oncord(fecha_txt)
-                ev = make_event(
-                    uid=f"sesion-{nombre.lower().replace(' ','-')}-{i}-{fecha_txt.replace(' ','').replace(',','')}",
-                    summary=f"{emoji_ses} TCF Canada — {nombre} {fecha_txt} [{est}]",
-                    dtstart=d if d else hoy,
-                    dtend=d if d else hoy,
-                    description="\n".join(desc_parts),
-                    url=url,
-                    confirmed=confirmado,
-                )
-                resultado.append(ev)
-
-            # Si es PRÓXIMO también agregar evento de apertura de registro
-            if est == "PRÓXIMO" and detalle and "abre" in detalle.lower():
-                m_abre = re.search(
-                    r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2},?\s+\d{4})",
-                    detalle, re.IGNORECASE
-                )
-                if m_abre:
-                    d_abre = parse_fecha_oncord(m_abre.group(1))
-                    if d_abre:
-                        ev = make_event(
-                            uid=f"registro-abre-{nombre.lower().replace(' ','-')}",
-                            summary=f"⏰ REGISTRO ABRE — {nombre}",
-                            dtstart=d_abre,
-                            dtend=d_abre,
-                            description=f"{detalle}\nRegistrarse: {url}",
-                            url=url,
-                            confirmed=True,
-                        )
-                        resultado.append(ev)
-        else:
-            # Evento general de estado (sin fechas específicas)
-            desc_parts = [f"Estado: {est}", f"Revisión: {ts}"]
-            if detalle:
-                desc_parts.append(f"Detalle: {detalle}")
+            desc_parts = [f"Centro: {nombre}"]
+            if fecha_examen and fecha_examen != "?":
+                desc_parts.append(f"Fecha del examen: {fecha_examen}")
+            desc_parts.append(f"Apertura de registro: {abre_txt}")
+            if spots:
+                desc_parts.append(f"Cupos disponibles al momento de la revisión: {spots}")
             if url:
-                desc_parts.append(f"Registrarse: {url}")
+                desc_parts.append(f"Registrarse aquí: {url}")
+            description = "\n".join(desc_parts)
 
-            ev = make_event(
-                uid=f"estado-{nombre.lower().replace(' ','-')}",
-                summary=f"{emoji} TCF Canada — {nombre} [{est}]",
-                dtstart=hoy,
-                dtend=hoy,
-                description="\n".join(desc_parts),
+            uid_base = f"{nombre.lower().replace(' ','-')}-{i}-{dt_abre.strftime('%Y%m%d%H%M')}"
+
+            ev = make_event_datetime(
+                uid=f"apertura-{uid_base}",
+                summary=summary,
+                dt=dt_abre,
+                description=description,
                 url=url,
-                confirmed=(est == "DISPONIBLE"),
+                location=location,
+                alarm_minutes_before=30,
             )
-            resultado.append(ev)
-    return resultado
+            eventos.append(ev)
+
+    return eventos
 
 
 # ─────────────────────────────────────────────────────────
@@ -412,9 +219,6 @@ def eventos_dinamicos(estado: dict, hoy: date) -> list[list[str]]:
 def generar(estado_path: str = "tcf_estado.json",
             output_path: str = "TCF_Canada_2026.ics") -> None:
 
-    hoy = date.today()
-
-    # Leer estado actual
     estado = {}
     p = Path(estado_path)
     if p.exists():
@@ -423,39 +227,40 @@ def generar(estado_path: str = "tcf_estado.json",
         except Exception as e:
             print(f"⚠️  No se pudo leer {estado_path}: {e}")
 
-    # Construir líneas del calendario
+    eventos = eventos_desde_estado(estado)
+
     cal = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
         "PRODID:-//TCF Canada Monitor//nrodrigueze//ES",
         "CALSCALE:GREGORIAN",
         "METHOD:PUBLISH",
-        fold("X-WR-CALNAME:TCF Canada 2026 — Monitor"),
+        fold("X-WR-CALNAME:TCF Canada — Aperturas de registro"),
         "X-WR-TIMEZONE:America/Vancouver",
-        fold(f"X-WR-CALDESC:Actualizado {hoy.isoformat()} — 9 centros en Canadá. Estado en tiempo real + fechas fijas."),
+        fold(f"X-WR-CALDESC:Actualizado {date.today().isoformat()} — avisos de apertura de registro con 30 min de anticipación."),
         "REFRESH-INTERVAL;VALUE=DURATION:PT2H",
         fold(f"SOURCE:https://raw.githubusercontent.com/nrodrigueze/tcf-monitor/main/{output_path}"),
+        # VTIMEZONE estándar para America/Vancouver (Pacific Time, con DST)
+        "BEGIN:VTIMEZONE",
+        "TZID:America/Vancouver",
+        "BEGIN:DAYLIGHT",
+        "TZOFFSETFROM:-0800",
+        "TZOFFSETTO:-0700",
+        "TZNAME:PDT",
+        "DTSTART:19700308T020000",
+        "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU",
+        "END:DAYLIGHT",
+        "BEGIN:STANDARD",
+        "TZOFFSETFROM:-0700",
+        "TZOFFSETTO:-0800",
+        "TZNAME:PST",
+        "DTSTART:19701101T020000",
+        "RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU",
+        "END:STANDARD",
+        "END:VTIMEZONE",
     ]
 
-    # Eventos de estado dinámico
-    if estado:
-        for ev_lines in eventos_dinamicos(estado, hoy):
-            cal.extend(ev_lines)
-    else:
-        print("ℹ️  Sin estado previo — solo eventos fijos")
-
-    # Eventos fijos
-    for ef in EVENTOS_FIJOS:
-        ev_lines = make_event(
-            uid=ef["uid"],
-            summary=ef["summary"],
-            dtstart=ef["dtstart"],
-            dtend=ef["dtend"],
-            description=ef.get("description", ""),
-            location=ef.get("location", ""),
-            url=ef.get("url", ""),
-            confirmed=ef.get("confirmed", True),
-        )
+    for ev_lines in eventos:
         cal.extend(ev_lines)
 
     cal.append("END:VCALENDAR")
@@ -463,8 +268,9 @@ def generar(estado_path: str = "tcf_estado.json",
     content = "\r\n".join(cal) + "\r\n"
     Path(output_path).write_text(content, encoding="utf-8")
 
-    total = len(estado) + len(EVENTOS_FIJOS)
-    print(f"✅ {output_path} generado — {total} eventos ({len(estado)} dinámicos + {len(EVENTOS_FIJOS)} fijos)")
+    print(f"✅ {output_path} generado — {len(eventos)} evento(s) de apertura de registro")
+    if not eventos:
+        print("   (sin aperturas detectadas en esta revisión — calendario vacío, sin ruido)")
     print(f"   Suscripción: https://raw.githubusercontent.com/nrodrigueze/tcf-monitor/main/{output_path}")
 
 
