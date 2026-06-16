@@ -2,16 +2,18 @@ name: TCF Canada Monitor
 
 on:
   schedule:
+    # Corre cada 2 horas (UTC). En PDT (Surrey BC) = 2h después.
     - cron: "0 */2 * * *"
   workflow_dispatch:
+    # Permite correrlo manualmente con un click desde github.com
 
 permissions:
-  contents: write
+  contents: write   # necesario para hacer commit del ICS actualizado
 
 jobs:
   check-availability:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
       - name: Checkout repositorio
@@ -23,7 +25,10 @@ jobs:
           python-version: "3.12"
 
       - name: Instalar dependencias
-        run: pip install requests beautifulsoup4 lxml
+        run: pip install requests beautifulsoup4 lxml playwright
+
+      - name: Instalar navegador Chromium (Playwright)
+        run: playwright install --with-deps chromium
 
       - name: Correr monitor
         env:
