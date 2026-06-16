@@ -31,6 +31,13 @@ from datetime import datetime
 from pathlib import Path
 from bs4 import BeautifulSoup
 
+# Playwright para páginas que renderizan tablas vía JavaScript (Oncord: Vancouver/Victoria)
+try:
+    from playwright.sync_api import sync_playwright
+    PLAYWRIGHT_OK = True
+except ImportError:
+    PLAYWRIGHT_OK = False
+
 # Intentar importar smtplib (siempre disponible en Python estándar)
 import smtplib
 from email.mime.text import MIMEText
@@ -241,6 +248,52 @@ def fetch_page(url: str, intentos: int = 3, pausa: float = 4.0):
     return None
 
 
+def fetch_page_js(url: str, espera_selector: str = "table", timeout_ms: int = 25000):
+    """
+    Descarga una página y espera a que el JavaScript la renderice por completo
+    antes de devolver el HTML. Necesario para sitios Oncord (Vancouver, Victoria)
+    donde la tabla de sesiones se inyecta dinámicamente vía fetch/AJAX y nunca
+    aparece en el HTML estático que devuelve requests.
+
+    espera_selector: selector CSS a esperar antes de capturar el HTML.
+                      Si no aparece a tiempo, se captura el HTML de todas formas
+                      (puede no tener la tabla — se maneja como "sin sesiones").
+    """
+    if not PLAYWRIGHT_OK:
+        log.warning("Playwright no está instalado — fetch_page_js no disponible. "
+                     "Ejecuta: pip install playwright && playwright install chromium")
+        return None
+
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page(
+                user_agent=USER_AGENTS[0],
+                viewport={"width": 1280, "height": 900},
+            )
+            page.set_extra_http_headers({
+                "Accept-Language": "en-CA,en;q=0.9",
+            })
+            page.goto(url, wait_until="networkidle", timeout=timeout_ms)
+
+            # Esperar a que la tabla de sesiones aparezca en el DOM
+            try:
+                page.wait_for_selector(espera_selector, timeout=8000)
+            except Exception:
+                # La tabla puede no existir si no hay sesiones — seguimos igual
+                pass
+
+            # Pausa extra corta por si el fetch interno aún está poblando filas
+            page.wait_for_timeout(1500)
+
+            html = page.content()
+            browser.close()
+            return BeautifulSoup(html, "lxml")
+    except Exception as e:
+        log.warning(f"fetch_page_js falló para {url}: {e}")
+        return None
+
+
 # ─────────────────────────────────────────────────────────
 #  DETECCIÓN DE FECHAS  (ES/FR/EN)
 # ─────────────────────────────────────────────────────────
@@ -287,7 +340,11 @@ def check_vancouver(centro: dict) -> dict:
     """
     r = _resultado_base(centro["nombre"], centro["ciudad"],
                         centro["url_registro"], centro["url_check"], centro["notas"])
-    soup = fetch_page(centro["url_check"])
+    # La tabla de sesiones se renderiza vía JS (Oncord) — usar navegador headless
+    soup = fetch_page_js(centro["url_check"], espera_selector="table")
+    if not soup:
+        # Fallback: HTML estático (no tendrá la tabla, pero evita fallo total)
+        soup = fetch_page(centro["url_check"])
     if not soup:
         r["estado"] = "BLOQUEADO"
         r["detalle"] = "Sitio bloqueó el acceso. Verificar manualmente en alliancefrancaise.ca"
@@ -588,7 +645,9 @@ def check_victoria(centro: dict) -> dict:
     """
     r = _resultado_base(centro["nombre"], centro["ciudad"],
                         centro["url_registro"], centro["url_check"], centro["notas"])
-    soup = fetch_page(centro["url_check"])
+    soup = fetch_page_js(centro["url_check"], espera_selector="table")
+    if not soup:
+        soup = fetch_page(centro["url_check"])
     if not soup:
         r["estado"] = "BLOQUEADO"
         r["detalle"] = "Sitio bloqueó el acceso. Verificar en afvictoria.ca/exams/tcf/"
