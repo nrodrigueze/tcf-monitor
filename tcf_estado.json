@@ -10,10 +10,19 @@
       "September 21st, 2026",
       "September 23rd, 2026",
       "September 25th, 2026",
-      "September 28th, 2026"
+      "September 28th, 2026",
+      "October 2, 2026",
+      "October 5, 2026",
+      "October 7, 2026",
+      "October 9, 2026",
+      "October 14, 2026",
+      "October 16, 2026",
+      "October 23, 2026",
+      "October 26, 2026",
+      "October 28, 2026"
     ],
-    "detalle": "9 apertura(s) de registro detectada(s)",
-    "ts": "2026-06-19T21:01:14.010594",
+    "detalle": "18 apertura(s) de registro detectada(s)",
+    "ts": "2026-06-19T22:43:54.239225",
     "sesiones": [
       {
         "fecha_examen": "September 9, 2026",
@@ -59,6 +68,51 @@
         "fecha_examen": "September 28th, 2026",
         "abre_registro": "Jun 22 2026 3:00pm",
         "spots": 40
+      },
+      {
+        "fecha_examen": "October 2, 2026",
+        "abre_registro": "Jul 6 2026 3:00pm",
+        "spots": 40
+      },
+      {
+        "fecha_examen": "October 5, 2026",
+        "abre_registro": "Jul 6 2026 3:00pm",
+        "spots": 40
+      },
+      {
+        "fecha_examen": "October 7, 2026",
+        "abre_registro": "Jul 6 2026 3:00pm",
+        "spots": 41
+      },
+      {
+        "fecha_examen": "October 9, 2026",
+        "abre_registro": "Jul 6 2026 3:00pm",
+        "spots": 29
+      },
+      {
+        "fecha_examen": "October 14, 2026",
+        "abre_registro": "Jul 6 2026 3:00pm",
+        "spots": 40
+      },
+      {
+        "fecha_examen": "October 16, 2026",
+        "abre_registro": "Jul 6 2026 3:00pm",
+        "spots": 40
+      },
+      {
+        "fecha_examen": "October 23, 2026",
+        "abre_registro": "Jul 6 2026 3:00pm",
+        "spots": 40
+      },
+      {
+        "fecha_examen": "October 26, 2026",
+        "abre_registro": "Jul 6 2026 3:00pm",
+        "spots": 40
+      },
+      {
+        "fecha_examen": "October 28, 2026",
+        "abre_registro": "Jul 6 2026 3:00pm",
+        "spots": 40
       }
     ]
   },
@@ -66,42 +120,42 @@
     "estado": "SIN_EVENTO",
     "fechas": [],
     "detalle": "Sin aperturas de registro pendientes detectadas",
-    "ts": "2026-06-19T21:01:25.496045",
+    "ts": "2026-06-19T22:44:06.231765",
     "sesiones": []
   },
   "AF Toronto": {
-    "estado": "BLOQUEADO",
+    "estado": "VERIFICAR",
     "fechas": [],
-    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-06-19T21:01:32.173575",
+    "detalle": "Sin fechas detectadas — verificar manualmente",
+    "ts": "2026-06-19T22:44:12.492523",
     "sesiones": []
   },
   "AF Calgary": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-19T21:01:50.545635",
+    "ts": "2026-06-19T22:44:17.249588",
     "sesiones": []
   },
   "AF Edmonton": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-19T21:01:55.252236",
+    "ts": "2026-06-19T22:44:21.725741",
     "sesiones": []
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-06-19T21:02:00.721142",
+    "ts": "2026-06-19T22:44:26.969148",
     "sesiones": []
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-06-19T21:02:19.059330",
+    "ts": "2026-06-19T22:44:45.340117",
     "sesiones": []
   }
 }
