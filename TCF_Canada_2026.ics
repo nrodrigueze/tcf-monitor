@@ -28,187 +28,8 @@ RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-UID:apertura-af-vancouver-0-202606221500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
-DTSTART;TZID=America/Vancouver:20260622T150000
-DTEND;TZID=America/Vancouver:20260622T153000
-SUMMARY:⏰ Registro abre — AF Vancouver (examen September 9\, 2026)
-DESCRIPTION:Centro: AF Vancouver\nFecha del examen: September 9\, 2026\nApe
- rtura de registro: Jun 22 2026 3:00pm\nCupos disponibles al momento de la 
- revisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/lang
- uage/exams/tcf-canada/
-LOCATION:6161 Cambie Street\, Vancouver\, BC
-URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
-STATUS:CONFIRMED
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:⏰ Registro abre — AF Vancouver (examen September 9\, 2026)
-TRIGGER:-PT30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:apertura-af-vancouver-1-202606221500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
-DTSTART;TZID=America/Vancouver:20260622T150000
-DTEND;TZID=America/Vancouver:20260622T153000
-SUMMARY:⏰ Registro abre — AF Vancouver (examen September 11th\, 2026)
-DESCRIPTION:Centro: AF Vancouver\nFecha del examen: September 11th\, 2026\n
- Apertura de registro: Jun 22 2026 3:00pm\nCupos disponibles al momento de 
- la revisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/l
- anguage/exams/tcf-canada/
-LOCATION:6161 Cambie Street\, Vancouver\, BC
-URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
-STATUS:CONFIRMED
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:⏰ Registro abre — AF Vancouver (examen September 11th\, 202
- 6)
-TRIGGER:-PT30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:apertura-af-vancouver-2-202606221500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
-DTSTART;TZID=America/Vancouver:20260622T150000
-DTEND;TZID=America/Vancouver:20260622T153000
-SUMMARY:⏰ Registro abre — AF Vancouver (examen September 14th\, 2026)
-DESCRIPTION:Centro: AF Vancouver\nFecha del examen: September 14th\, 2026\n
- Apertura de registro: Jun 22 2026 3:00pm\nCupos disponibles al momento de 
- la revisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/l
- anguage/exams/tcf-canada/
-LOCATION:6161 Cambie Street\, Vancouver\, BC
-URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
-STATUS:CONFIRMED
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:⏰ Registro abre — AF Vancouver (examen September 14th\, 202
- 6)
-TRIGGER:-PT30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:apertura-af-vancouver-3-202606221500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
-DTSTART;TZID=America/Vancouver:20260622T150000
-DTEND;TZID=America/Vancouver:20260622T153000
-SUMMARY:⏰ Registro abre — AF Vancouver (examen September 16th\, 2026)
-DESCRIPTION:Centro: AF Vancouver\nFecha del examen: September 16th\, 2026\n
- Apertura de registro: Jun 22 2026 3:00pm\nCupos disponibles al momento de 
- la revisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/l
- anguage/exams/tcf-canada/
-LOCATION:6161 Cambie Street\, Vancouver\, BC
-URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
-STATUS:CONFIRMED
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:⏰ Registro abre — AF Vancouver (examen September 16th\, 202
- 6)
-TRIGGER:-PT30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:apertura-af-vancouver-4-202606221500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
-DTSTART;TZID=America/Vancouver:20260622T150000
-DTEND;TZID=America/Vancouver:20260622T153000
-SUMMARY:⏰ Registro abre — AF Vancouver (examen September 18th\, 2026)
-DESCRIPTION:Centro: AF Vancouver\nFecha del examen: September 18th\, 2026\n
- Apertura de registro: Jun 22 2026 3:00pm\nCupos disponibles al momento de 
- la revisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/l
- anguage/exams/tcf-canada/
-LOCATION:6161 Cambie Street\, Vancouver\, BC
-URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
-STATUS:CONFIRMED
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:⏰ Registro abre — AF Vancouver (examen September 18th\, 202
- 6)
-TRIGGER:-PT30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:apertura-af-vancouver-5-202606221500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
-DTSTART;TZID=America/Vancouver:20260622T150000
-DTEND;TZID=America/Vancouver:20260622T153000
-SUMMARY:⏰ Registro abre — AF Vancouver (examen September 21st\, 2026)
-DESCRIPTION:Centro: AF Vancouver\nFecha del examen: September 21st\, 2026\n
- Apertura de registro: Jun 22 2026 3:00pm\nCupos disponibles al momento de 
- la revisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/l
- anguage/exams/tcf-canada/
-LOCATION:6161 Cambie Street\, Vancouver\, BC
-URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
-STATUS:CONFIRMED
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:⏰ Registro abre — AF Vancouver (examen September 21st\, 202
- 6)
-TRIGGER:-PT30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:apertura-af-vancouver-6-202606221500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
-DTSTART;TZID=America/Vancouver:20260622T150000
-DTEND;TZID=America/Vancouver:20260622T153000
-SUMMARY:⏰ Registro abre — AF Vancouver (examen September 23rd\, 2026)
-DESCRIPTION:Centro: AF Vancouver\nFecha del examen: September 23rd\, 2026\n
- Apertura de registro: Jun 22 2026 3:00pm\nCupos disponibles al momento de 
- la revisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/l
- anguage/exams/tcf-canada/
-LOCATION:6161 Cambie Street\, Vancouver\, BC
-URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
-STATUS:CONFIRMED
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:⏰ Registro abre — AF Vancouver (examen September 23rd\, 202
- 6)
-TRIGGER:-PT30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:apertura-af-vancouver-7-202606221500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
-DTSTART;TZID=America/Vancouver:20260622T150000
-DTEND;TZID=America/Vancouver:20260622T153000
-SUMMARY:⏰ Registro abre — AF Vancouver (examen September 25th\, 2026)
-DESCRIPTION:Centro: AF Vancouver\nFecha del examen: September 25th\, 2026\n
- Apertura de registro: Jun 22 2026 3:00pm\nCupos disponibles al momento de 
- la revisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/l
- anguage/exams/tcf-canada/
-LOCATION:6161 Cambie Street\, Vancouver\, BC
-URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
-STATUS:CONFIRMED
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:⏰ Registro abre — AF Vancouver (examen September 25th\, 202
- 6)
-TRIGGER:-PT30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:apertura-af-vancouver-8-202606221500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
-DTSTART;TZID=America/Vancouver:20260622T150000
-DTEND;TZID=America/Vancouver:20260622T153000
-SUMMARY:⏰ Registro abre — AF Vancouver (examen September 28th\, 2026)
-DESCRIPTION:Centro: AF Vancouver\nFecha del examen: September 28th\, 2026\n
- Apertura de registro: Jun 22 2026 3:00pm\nCupos disponibles al momento de 
- la revisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/l
- anguage/exams/tcf-canada/
-LOCATION:6161 Cambie Street\, Vancouver\, BC
-URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
-STATUS:CONFIRMED
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:⏰ Registro abre — AF Vancouver (examen September 28th\, 202
- 6)
-TRIGGER:-PT30M
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:apertura-af-vancouver-9-202607061500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
+UID:apertura-af-vancouver-0-202607061500@tcf-monitor-nrodrigueze
+DTSTAMP:20260622T231235Z
 DTSTART;TZID=America/Vancouver:20260706T150000
 DTEND;TZID=America/Vancouver:20260706T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen October 2\, 2026)
@@ -226,8 +47,8 @@ TRIGGER:-PT30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:apertura-af-vancouver-10-202607061500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
+UID:apertura-af-vancouver-1-202607061500@tcf-monitor-nrodrigueze
+DTSTAMP:20260622T231235Z
 DTSTART;TZID=America/Vancouver:20260706T150000
 DTEND;TZID=America/Vancouver:20260706T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen October 5\, 2026)
@@ -245,8 +66,8 @@ TRIGGER:-PT30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:apertura-af-vancouver-11-202607061500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
+UID:apertura-af-vancouver-2-202607061500@tcf-monitor-nrodrigueze
+DTSTAMP:20260622T231235Z
 DTSTART;TZID=America/Vancouver:20260706T150000
 DTEND;TZID=America/Vancouver:20260706T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen October 7\, 2026)
@@ -264,8 +85,8 @@ TRIGGER:-PT30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:apertura-af-vancouver-12-202607061500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
+UID:apertura-af-vancouver-3-202607061500@tcf-monitor-nrodrigueze
+DTSTAMP:20260622T231235Z
 DTSTART;TZID=America/Vancouver:20260706T150000
 DTEND;TZID=America/Vancouver:20260706T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen October 9\, 2026)
@@ -283,8 +104,8 @@ TRIGGER:-PT30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:apertura-af-vancouver-13-202607061500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
+UID:apertura-af-vancouver-4-202607061500@tcf-monitor-nrodrigueze
+DTSTAMP:20260622T231235Z
 DTSTART;TZID=America/Vancouver:20260706T150000
 DTEND;TZID=America/Vancouver:20260706T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen October 14\, 2026)
@@ -302,8 +123,8 @@ TRIGGER:-PT30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:apertura-af-vancouver-14-202607061500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
+UID:apertura-af-vancouver-5-202607061500@tcf-monitor-nrodrigueze
+DTSTAMP:20260622T231235Z
 DTSTART;TZID=America/Vancouver:20260706T150000
 DTEND;TZID=America/Vancouver:20260706T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen October 16\, 2026)
@@ -321,8 +142,8 @@ TRIGGER:-PT30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:apertura-af-vancouver-15-202607061500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
+UID:apertura-af-vancouver-6-202607061500@tcf-monitor-nrodrigueze
+DTSTAMP:20260622T231235Z
 DTSTART;TZID=America/Vancouver:20260706T150000
 DTEND;TZID=America/Vancouver:20260706T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen October 23\, 2026)
@@ -340,8 +161,8 @@ TRIGGER:-PT30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:apertura-af-vancouver-16-202607061500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
+UID:apertura-af-vancouver-7-202607061500@tcf-monitor-nrodrigueze
+DTSTAMP:20260622T231235Z
 DTSTART;TZID=America/Vancouver:20260706T150000
 DTEND;TZID=America/Vancouver:20260706T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen October 26\, 2026)
@@ -359,8 +180,8 @@ TRIGGER:-PT30M
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:apertura-af-vancouver-17-202607061500@tcf-monitor-nrodrigueze
-DTSTAMP:20260622T215628Z
+UID:apertura-af-vancouver-8-202607061500@tcf-monitor-nrodrigueze
+DTSTAMP:20260622T231235Z
 DTSTART;TZID=America/Vancouver:20260706T150000
 DTEND;TZID=America/Vancouver:20260706T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen October 28\, 2026)
