@@ -13,27 +13,27 @@
       "October 28, 2026"
     ],
     "detalle": "9 apertura(s) de registro detectada(s)",
-    "ts": "2026-06-25T14:03:29.773113",
+    "ts": "2026-06-25T18:03:09.509590",
     "sesiones": [
       {
         "fecha_examen": "October 2, 2026",
         "abre_registro": "Jul 6 2026 3:00pm",
-        "spots": 32
+        "spots": 29
       },
       {
         "fecha_examen": "October 5, 2026",
         "abre_registro": "Jul 6 2026 3:00pm",
-        "spots": 29
+        "spots": 25
       },
       {
         "fecha_examen": "October 7, 2026",
         "abre_registro": "Jul 6 2026 3:00pm",
-        "spots": 31
+        "spots": 29
       },
       {
         "fecha_examen": "October 9, 2026",
         "abre_registro": "Jul 6 2026 3:00pm",
-        "spots": 24
+        "spots": 22
       },
       {
         "fecha_examen": "October 14, 2026",
@@ -48,17 +48,17 @@
       {
         "fecha_examen": "October 23, 2026",
         "abre_registro": "Jul 6 2026 3:00pm",
-        "spots": 35
+        "spots": 33
       },
       {
         "fecha_examen": "October 26, 2026",
         "abre_registro": "Jul 6 2026 3:00pm",
-        "spots": 36
+        "spots": 35
       },
       {
         "fecha_examen": "October 28, 2026",
         "abre_registro": "Jul 6 2026 3:00pm",
-        "spots": 37
+        "spots": 33
       }
     ]
   },
@@ -66,42 +66,42 @@
     "estado": "SIN_EVENTO",
     "fechas": [],
     "detalle": "Sin aperturas de registro pendientes detectadas",
-    "ts": "2026-06-25T14:03:37.734572",
+    "ts": "2026-06-25T18:03:18.813852",
     "sesiones": []
   },
   "AF Toronto": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin fechas detectadas — verificar manualmente",
-    "ts": "2026-06-25T14:03:44.244373",
+    "ts": "2026-06-25T18:03:25.100143",
     "sesiones": []
   },
   "AF Calgary": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-25T14:03:48.764320",
+    "ts": "2026-06-25T18:03:29.636955",
     "sesiones": []
   },
   "AF Edmonton": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-25T14:03:53.474671",
+    "ts": "2026-06-25T18:03:34.307822",
     "sesiones": []
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-06-25T14:03:58.544962",
+    "ts": "2026-06-25T18:03:39.371962",
     "sesiones": []
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-06-25T14:04:16.832841",
+    "ts": "2026-06-25T18:03:57.908160",
     "sesiones": []
   }
 }
