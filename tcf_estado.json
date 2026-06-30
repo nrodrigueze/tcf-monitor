@@ -13,7 +13,7 @@
       "October 28, 2026"
     ],
     "detalle": "9 apertura(s) de registro detectada(s)",
-    "ts": "2026-06-30T16:15:47.218999",
+    "ts": "2026-06-30T19:31:01.949807",
     "sesiones": [
       {
         "fecha_examen": "October 2, 2026",
@@ -28,7 +28,7 @@
       {
         "fecha_examen": "October 7, 2026",
         "abre_registro": "Jul 6 2026 3:00pm",
-        "spots": 10
+        "spots": 9
       },
       {
         "fecha_examen": "October 9, 2026",
@@ -48,7 +48,7 @@
       {
         "fecha_examen": "October 23, 2026",
         "abre_registro": "Jul 6 2026 3:00pm",
-        "spots": 22
+        "spots": 20
       },
       {
         "fecha_examen": "October 26, 2026",
@@ -66,42 +66,42 @@
     "estado": "SIN_EVENTO",
     "fechas": [],
     "detalle": "Sin aperturas de registro pendientes detectadas",
-    "ts": "2026-06-30T16:15:57.333762",
+    "ts": "2026-06-30T19:31:11.564141",
     "sesiones": []
   },
   "AF Toronto": {
-    "estado": "VERIFICAR",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin fechas detectadas — verificar manualmente",
-    "ts": "2026-06-30T16:16:03.792976",
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
+    "ts": "2026-06-30T19:31:17.908340",
     "sesiones": []
   },
   "AF Calgary": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-30T16:16:08.368893",
+    "ts": "2026-06-30T19:31:36.545267",
     "sesiones": []
   },
   "AF Edmonton": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-06-30T16:16:13.096921",
+    "ts": "2026-06-30T19:31:41.186797",
     "sesiones": []
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-06-30T16:16:18.071153",
+    "ts": "2026-06-30T19:31:46.003019",
     "sesiones": []
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-06-30T16:16:36.332805",
+    "ts": "2026-06-30T19:32:04.345758",
     "sesiones": []
   }
 }
