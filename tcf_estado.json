@@ -13,7 +13,7 @@
       "October 28, 2026"
     ],
     "detalle": "9 apertura(s) de registro detectada(s)",
-    "ts": "2026-07-02T15:59:52.813417",
+    "ts": "2026-07-02T17:50:24.086490",
     "sesiones": [
       {
         "fecha_examen": "October 2, 2026",
@@ -38,7 +38,7 @@
       {
         "fecha_examen": "October 14, 2026",
         "abre_registro": "Jul 6 2026 3:00pm",
-        "spots": 30
+        "spots": 29
       },
       {
         "fecha_examen": "October 16, 2026",
@@ -66,42 +66,42 @@
     "estado": "SIN_EVENTO",
     "fechas": [],
     "detalle": "Sin aperturas de registro pendientes detectadas",
-    "ts": "2026-07-02T16:00:00.885357",
+    "ts": "2026-07-02T17:50:33.155633",
     "sesiones": []
   },
   "AF Toronto": {
-    "estado": "VERIFICAR",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin fechas detectadas — verificar manualmente",
-    "ts": "2026-07-02T16:00:07.359593",
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
+    "ts": "2026-07-02T17:50:39.340810",
     "sesiones": []
   },
   "AF Calgary": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-07-02T16:00:11.918433",
+    "ts": "2026-07-02T17:50:57.933131",
     "sesiones": []
   },
   "AF Edmonton": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-07-02T16:00:16.733255",
+    "ts": "2026-07-02T17:51:02.397725",
     "sesiones": []
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-07-02T16:00:21.774132",
+    "ts": "2026-07-02T17:51:07.107481",
     "sesiones": []
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-07-02T16:00:40.061947",
+    "ts": "2026-07-02T17:51:25.365883",
     "sesiones": []
   }
 }
