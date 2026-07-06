@@ -3,49 +3,49 @@
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente en alliancefrancaise.ca",
-    "ts": "2026-07-06T02:08:06.583488",
+    "ts": "2026-07-06T08:10:10.366548",
     "sesiones": []
   },
   "AF Victoria": {
-    "estado": "SIN_EVENTO",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin aperturas de registro pendientes detectadas",
-    "ts": "2026-07-06T02:10:19.497142",
+    "detalle": "Sitio bloqueó el acceso. Verificar en afvictoria.ca/exams/tcf/",
+    "ts": "2026-07-06T08:10:27.334586",
     "sesiones": []
   },
   "AF Toronto": {
-    "estado": "VERIFICAR",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin fechas detectadas — verificar manualmente",
-    "ts": "2026-07-06T02:10:27.612347",
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
+    "ts": "2026-07-06T08:10:43.656062",
     "sesiones": []
   },
   "AF Calgary": {
-    "estado": "VERIFICAR",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-07-06T02:10:32.313247",
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
+    "ts": "2026-07-06T08:11:01.990966",
     "sesiones": []
   },
   "AF Edmonton": {
-    "estado": "VERIFICAR",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-07-06T02:10:38.168183",
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
+    "ts": "2026-07-06T08:11:17.713949",
     "sesiones": []
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-07-06T02:10:44.453881",
+    "ts": "2026-07-06T08:11:33.433844",
     "sesiones": []
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-07-06T02:11:03.047354",
+    "ts": "2026-07-06T08:11:51.696484",
     "sesiones": []
   }
 }
