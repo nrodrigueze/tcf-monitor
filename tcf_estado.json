@@ -1,65 +1,51 @@
 {
   "AF Vancouver": {
-    "estado": "PRÓXIMO",
-    "fechas": [
-      "October 2, 2026",
-      "October 5, 2026"
-    ],
-    "detalle": "2 apertura(s) de registro detectada(s)",
-    "ts": "2026-07-06T21:21:02.630544",
-    "sesiones": [
-      {
-        "fecha_examen": "October 2, 2026",
-        "abre_registro": "Jul 6 2026 3:00pm",
-        "spots": 17
-      },
-      {
-        "fecha_examen": "October 5, 2026",
-        "abre_registro": "Jul 6 2026 3:00pm",
-        "spots": 12
-      }
-    ]
+    "estado": "SIN_EVENTO",
+    "fechas": [],
+    "detalle": "Sin aperturas de registro pendientes detectadas",
+    "ts": "2026-07-06T22:57:50.556078",
+    "sesiones": []
   },
   "AF Victoria": {
     "estado": "SIN_EVENTO",
     "fechas": [],
     "detalle": "Sin aperturas de registro pendientes detectadas",
-    "ts": "2026-07-06T21:21:10.499244",
+    "ts": "2026-07-06T22:57:58.445179",
     "sesiones": []
   },
   "AF Toronto": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-07-06T21:21:17.083824",
+    "ts": "2026-07-06T22:58:04.758562",
     "sesiones": []
   },
   "AF Calgary": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-07-06T21:21:35.986933",
+    "ts": "2026-07-06T22:58:22.962209",
     "sesiones": []
   },
   "AF Edmonton": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-07-06T21:21:40.833701",
+    "ts": "2026-07-06T22:58:27.646874",
     "sesiones": []
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-07-06T21:21:45.834810",
+    "ts": "2026-07-06T22:58:32.640761",
     "sesiones": []
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-07-06T21:22:04.121295",
+    "ts": "2026-07-06T22:58:50.884390",
     "sesiones": []
   }
 }
