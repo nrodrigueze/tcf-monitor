@@ -1,51 +1,51 @@
 {
   "AF Vancouver": {
-    "estado": "SIN_EVENTO",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin aperturas de registro pendientes detectadas",
-    "ts": "2026-07-10T19:15:40.212503",
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente en alliancefrancaise.ca",
+    "ts": "2026-07-10T20:59:45.130692",
     "sesiones": []
   },
   "AF Victoria": {
-    "estado": "SIN_EVENTO",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin aperturas de registro pendientes detectadas",
-    "ts": "2026-07-10T19:15:50.746480",
+    "detalle": "Sitio bloqueó el acceso. Verificar en afvictoria.ca/exams/tcf/",
+    "ts": "2026-07-10T21:00:01.501305",
     "sesiones": []
   },
   "AF Toronto": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin fechas detectadas — verificar manualmente",
-    "ts": "2026-07-10T19:15:56.726846",
+    "ts": "2026-07-10T21:00:17.377000",
     "sesiones": []
   },
   "AF Calgary": {
-    "estado": "VERIFICAR",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-07-10T19:16:01.512995",
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
+    "ts": "2026-07-10T21:00:22.021876",
     "sesiones": []
   },
   "AF Edmonton": {
-    "estado": "VERIFICAR",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-07-10T19:16:06.176675",
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
+    "ts": "2026-07-10T21:00:37.598152",
     "sesiones": []
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-07-10T19:16:10.855713",
+    "ts": "2026-07-10T21:00:52.928307",
     "sesiones": []
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-07-10T19:16:29.343658",
+    "ts": "2026-07-10T21:01:11.547630",
     "sesiones": []
   }
 }
