@@ -3,49 +3,49 @@
     "estado": "SIN_EVENTO",
     "fechas": [],
     "detalle": "Sin aperturas de registro pendientes detectadas",
-    "ts": "2026-07-11T10:54:30.707218",
+    "ts": "2026-07-11T12:54:34.353414",
     "sesiones": []
   },
   "AF Victoria": {
     "estado": "SIN_EVENTO",
     "fechas": [],
     "detalle": "Sin aperturas de registro pendientes detectadas",
-    "ts": "2026-07-11T10:54:40.285416",
+    "ts": "2026-07-11T12:54:42.345368",
     "sesiones": []
   },
   "AF Toronto": {
-    "estado": "BLOQUEADO",
+    "estado": "VERIFICAR",
     "fechas": [],
-    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-07-11T10:54:46.859114",
+    "detalle": "Sin fechas detectadas — verificar manualmente",
+    "ts": "2026-07-11T12:54:48.860069",
     "sesiones": []
   },
   "AF Calgary": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-07-11T10:55:05.203379",
+    "ts": "2026-07-11T12:54:53.401688",
     "sesiones": []
   },
   "AF Edmonton": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-07-11T10:55:09.954070",
+    "ts": "2026-07-11T12:54:58.138253",
     "sesiones": []
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-07-11T10:55:15.011059",
+    "ts": "2026-07-11T12:55:03.213310",
     "sesiones": []
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-07-11T10:55:33.268718",
+    "ts": "2026-07-11T12:55:21.469655",
     "sesiones": []
   }
 }
