@@ -5,7 +5,7 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:TCF Canada — Aperturas de registro
 X-WR-TIMEZONE:America/Vancouver
-X-WR-CALDESC:Actualizado 2026-07-13 — avisos de apertura de registro con 
+X-WR-CALDESC:Actualizado 2026-07-14 — avisos de apertura de registro con 
  30 min de anticipación.
 REFRESH-INTERVAL;VALUE=DURATION:PT2H
 SOURCE:https://raw.githubusercontent.com/nrodrigueze/tcf-monitor/main/TCF_C
