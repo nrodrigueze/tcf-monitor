@@ -27,4 +27,274 @@ DTSTART:19701101T020000
 RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
 END:STANDARD
 END:VTIMEZONE
+BEGIN:VEVENT
+UID:apertura-af-victoria-0-202608041500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260804T150000
+DTEND;TZID=America/Vancouver:20260804T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen September 8\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: September 8\, 2026\nAper
+ tura de registro: Aug 4 2026 3:00pm\nCupos disponibles al momento de la re
+ visión: 9\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen September 8\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-1-202608041500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260804T150000
+DTEND;TZID=America/Vancouver:20260804T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen September 9\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: September 9\, 2026\nAper
+ tura de registro: Aug 4 2026 3:00pm\nCupos disponibles al momento de la re
+ visión: 18\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen September 9\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-2-202608041500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260804T150000
+DTEND;TZID=America/Vancouver:20260804T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen September 10\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: September 10\, 2026\nApe
+ rtura de registro: Aug 4 2026 3:00pm\nCupos disponibles al momento de la r
+ evisión: 18\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen September 10\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-3-202608041500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260804T150000
+DTEND;TZID=America/Vancouver:20260804T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen September 11\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: September 11\, 2026\nApe
+ rtura de registro: Aug 4 2026 3:00pm\nCupos disponibles al momento de la r
+ evisión: 18\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen September 11\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-4-202608041500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260804T150000
+DTEND;TZID=America/Vancouver:20260804T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen September 15\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: September 15\, 2026\nApe
+ rtura de registro: Aug 4 2026 3:00pm\nCupos disponibles al momento de la r
+ evisión: 9\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen September 15\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-5-202608041500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260804T150000
+DTEND;TZID=America/Vancouver:20260804T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen September 16\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: September 16\, 2026\nApe
+ rtura de registro: Aug 4 2026 3:00pm\nCupos disponibles al momento de la r
+ evisión: 18\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen September 16\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-6-202608041500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260804T150000
+DTEND;TZID=America/Vancouver:20260804T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen September 17\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: September 17\, 2026\nApe
+ rtura de registro: Aug 4 2026 3:00pm\nCupos disponibles al momento de la r
+ evisión: 18\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen September 17\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-7-202608041500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260804T150000
+DTEND;TZID=America/Vancouver:20260804T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen September 18\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: September 18\, 2026\nApe
+ rtura de registro: Aug 4 2026 3:00pm\nCupos disponibles al momento de la r
+ evisión: 18\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen September 18\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-8-202608041500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260804T150000
+DTEND;TZID=America/Vancouver:20260804T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen September 25\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: September 25\, 2026\nApe
+ rtura de registro: Aug 4 2026 3:00pm\nCupos disponibles al momento de la r
+ evisión: 18\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen September 25\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-9-202608041500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260804T150000
+DTEND;TZID=America/Vancouver:20260804T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen September 29\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: September 29\, 2026\nApe
+ rtura de registro: Aug 4 2026 3:00pm\nCupos disponibles al momento de la r
+ evisión: 9\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen September 29\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-10-202608181500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260818T150000
+DTEND;TZID=America/Vancouver:20260818T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen October 8\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: October 8\, 2026\nApertu
+ ra de registro: Aug 18 2026 3:00pm\nCupos disponibles al momento de la rev
+ isión: 18\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen October 8\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-11-202608181500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260818T150000
+DTEND;TZID=America/Vancouver:20260818T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen October 9\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: October 9\, 2026\nApertu
+ ra de registro: Aug 18 2026 3:00pm\nCupos disponibles al momento de la rev
+ isión: 18\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen October 9\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-12-202608181500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260818T150000
+DTEND;TZID=America/Vancouver:20260818T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen October 13\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: October 13\, 2026\nApert
+ ura de registro: Aug 18 2026 3:00pm\nCupos disponibles al momento de la re
+ visión: 9\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen October 13\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-13-202608181500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260818T150000
+DTEND;TZID=America/Vancouver:20260818T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen October 14\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: October 14\, 2026\nApert
+ ura de registro: Aug 18 2026 3:00pm\nCupos disponibles al momento de la re
+ visión: 18\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen October 14\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-victoria-14-202608181500@tcf-monitor-nrodrigueze
+DTSTAMP:20260719T203837Z
+DTSTART;TZID=America/Vancouver:20260818T150000
+DTEND;TZID=America/Vancouver:20260818T153000
+SUMMARY:⏰ Registro abre — AF Victoria (examen October 15\, 2026)
+DESCRIPTION:Centro: AF Victoria\nFecha del examen: October 15\, 2026\nApert
+ ura de registro: Aug 18 2026 3:00pm\nCupos disponibles al momento de la re
+ visión: 18\nRegistrarse aquí: https://www.afvictoria.ca/exams/tcf/
+LOCATION:1B-1218 Langley Street\, Victoria\, BC
+URL:https://www.afvictoria.ca/exams/tcf/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Victoria (examen October 15\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
 END:VCALENDAR
