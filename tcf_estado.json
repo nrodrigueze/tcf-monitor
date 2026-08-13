@@ -1,145 +1,51 @@
 {
   "AF Vancouver": {
-    "estado": "PRÓXIMO",
-    "fechas": [
-      "Novembre 13, 2026",
-      "Novembre 16, 2026",
-      "Novembre 18, 2026",
-      "Novembre 19, 2026",
-      "Novembre 2, 2026",
-      "Novembre 20, 2026",
-      "Novembre 30, 2026",
-      "Novembre 4, 2026",
-      "Novembre 6, 2026",
-      "Novembre 9, 2026"
-    ],
-    "detalle": "10 apertura(s) de registro detectada(s)",
-    "ts": "2026-08-13T14:49:59.989539",
-    "sesiones": [
-      {
-        "fecha_examen": "Novembre 13, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 29
-      },
-      {
-        "fecha_examen": "Novembre 16, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 18, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 19, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 25
-      },
-      {
-        "fecha_examen": "Novembre 2, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 20, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 30, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 4, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 6, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 9, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      }
-    ]
+    "estado": "BLOQUEADO",
+    "fechas": [],
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente en alliancefrancaise.ca",
+    "ts": "2026-08-13T16:44:02.699436",
+    "sesiones": []
   },
   "AF Victoria": {
-    "estado": "PRÓXIMO",
-    "fechas": [
-      "October 8, 2026",
-      "October 9, 2026",
-      "October 13, 2026",
-      "October 14, 2026",
-      "October 15, 2026"
-    ],
-    "detalle": "5 apertura(s) de registro detectada(s)",
-    "ts": "2026-08-13T14:50:08.855852",
-    "sesiones": [
-      {
-        "fecha_examen": "October 8, 2026",
-        "abre_registro": "Aug 18 2026 3:00pm",
-        "spots": 18
-      },
-      {
-        "fecha_examen": "October 9, 2026",
-        "abre_registro": "Aug 18 2026 3:00pm",
-        "spots": 18
-      },
-      {
-        "fecha_examen": "October 13, 2026",
-        "abre_registro": "Aug 18 2026 3:00pm",
-        "spots": 9
-      },
-      {
-        "fecha_examen": "October 14, 2026",
-        "abre_registro": "Aug 18 2026 3:00pm",
-        "spots": 16
-      },
-      {
-        "fecha_examen": "October 15, 2026",
-        "abre_registro": "Aug 18 2026 3:00pm",
-        "spots": 18
-      }
-    ]
+    "estado": "BLOQUEADO",
+    "fechas": [],
+    "detalle": "Sitio bloqueó el acceso. Verificar en afvictoria.ca/exams/tcf/",
+    "ts": "2026-08-13T16:44:19.241607",
+    "sesiones": []
   },
   "AF Toronto": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin fechas detectadas — verificar manualmente",
-    "ts": "2026-08-13T14:50:15.386647",
+    "ts": "2026-08-13T16:44:35.408664",
     "sesiones": []
   },
   "AF Calgary": {
-    "estado": "VERIFICAR",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-08-13T14:50:19.948388",
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
+    "ts": "2026-08-13T16:44:39.975094",
     "sesiones": []
   },
   "AF Edmonton": {
-    "estado": "VERIFICAR",
+    "estado": "BLOQUEADO",
     "fechas": [],
-    "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-08-13T14:50:24.762823",
+    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
+    "ts": "2026-08-13T16:44:55.700638",
     "sesiones": []
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-08-13T14:50:29.742354",
+    "ts": "2026-08-13T16:45:11.530482",
     "sesiones": []
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-08-13T14:50:48.020580",
+    "ts": "2026-08-13T16:45:29.790062",
     "sesiones": []
   }
 }
