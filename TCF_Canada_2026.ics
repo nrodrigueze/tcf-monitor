@@ -5,7 +5,7 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:TCF Canada — Aperturas de registro
 X-WR-TIMEZONE:America/Vancouver
-X-WR-CALDESC:Actualizado 2026-08-24 — avisos de apertura de registro con 
+X-WR-CALDESC:Actualizado 2026-08-25 — avisos de apertura de registro con 
  30 min de anticipación.
 REFRESH-INTERVAL;VALUE=DURATION:PT2H
 SOURCE:https://raw.githubusercontent.com/nrodrigueze/tcf-monitor/main/TCF_C
@@ -29,7 +29,7 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:apertura-af-vancouver-0-202609011500@tcf-monitor-nrodrigueze
-DTSTAMP:20260824T221604Z
+DTSTAMP:20260825T003958Z
 DTSTART;TZID=America/Vancouver:20260901T150000
 DTEND;TZID=America/Vancouver:20260901T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen Novembre 13\, 2026)
@@ -48,7 +48,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:apertura-af-vancouver-1-202609011500@tcf-monitor-nrodrigueze
-DTSTAMP:20260824T221604Z
+DTSTAMP:20260825T003958Z
 DTSTART;TZID=America/Vancouver:20260901T150000
 DTEND;TZID=America/Vancouver:20260901T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen Novembre 16\, 2026)
@@ -67,7 +67,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:apertura-af-vancouver-2-202609011500@tcf-monitor-nrodrigueze
-DTSTAMP:20260824T221604Z
+DTSTAMP:20260825T003958Z
 DTSTART;TZID=America/Vancouver:20260901T150000
 DTEND;TZID=America/Vancouver:20260901T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen Novembre 18\, 2026)
@@ -86,7 +86,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:apertura-af-vancouver-3-202609011500@tcf-monitor-nrodrigueze
-DTSTAMP:20260824T221604Z
+DTSTAMP:20260825T003958Z
 DTSTART;TZID=America/Vancouver:20260901T150000
 DTEND;TZID=America/Vancouver:20260901T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen Novembre 19\, 2026)
@@ -105,7 +105,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:apertura-af-vancouver-4-202609011500@tcf-monitor-nrodrigueze
-DTSTAMP:20260824T221604Z
+DTSTAMP:20260825T003958Z
 DTSTART;TZID=America/Vancouver:20260901T150000
 DTEND;TZID=America/Vancouver:20260901T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen Novembre 2\, 2026)
@@ -124,7 +124,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:apertura-af-vancouver-5-202609011500@tcf-monitor-nrodrigueze
-DTSTAMP:20260824T221604Z
+DTSTAMP:20260825T003958Z
 DTSTART;TZID=America/Vancouver:20260901T150000
 DTEND;TZID=America/Vancouver:20260901T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen Novembre 20\, 2026)
@@ -143,7 +143,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:apertura-af-vancouver-6-202609011500@tcf-monitor-nrodrigueze
-DTSTAMP:20260824T221604Z
+DTSTAMP:20260825T003958Z
 DTSTART;TZID=America/Vancouver:20260901T150000
 DTEND;TZID=America/Vancouver:20260901T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen Novembre 30\, 2026)
@@ -162,7 +162,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:apertura-af-vancouver-7-202609011500@tcf-monitor-nrodrigueze
-DTSTAMP:20260824T221604Z
+DTSTAMP:20260825T003958Z
 DTSTART;TZID=America/Vancouver:20260901T150000
 DTEND;TZID=America/Vancouver:20260901T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen Novembre 4\, 2026)
@@ -181,7 +181,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:apertura-af-vancouver-8-202609011500@tcf-monitor-nrodrigueze
-DTSTAMP:20260824T221604Z
+DTSTAMP:20260825T003958Z
 DTSTART;TZID=America/Vancouver:20260901T150000
 DTEND;TZID=America/Vancouver:20260901T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen Novembre 6\, 2026)
@@ -200,7 +200,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:apertura-af-vancouver-9-202609011500@tcf-monitor-nrodrigueze
-DTSTAMP:20260824T221604Z
+DTSTAMP:20260825T003958Z
 DTSTART;TZID=America/Vancouver:20260901T150000
 DTEND;TZID=America/Vancouver:20260901T153000
 SUMMARY:⏰ Registro abre — AF Vancouver (examen Novembre 9\, 2026)
