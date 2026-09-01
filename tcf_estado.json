@@ -1,113 +1,51 @@
 {
   "AF Vancouver": {
-    "estado": "PRÓXIMO",
-    "fechas": [
-      "Novembre 13, 2026",
-      "Novembre 16, 2026",
-      "Novembre 18, 2026",
-      "Novembre 19, 2026",
-      "Novembre 2, 2026",
-      "Novembre 20, 2026",
-      "Novembre 30, 2026",
-      "Novembre 4, 2026",
-      "Novembre 6, 2026",
-      "Novembre 9, 2026"
-    ],
-    "detalle": "10 apertura(s) de registro detectada(s)",
-    "ts": "2026-09-01T18:59:15.522971",
-    "sesiones": [
-      {
-        "fecha_examen": "Novembre 13, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 29
-      },
-      {
-        "fecha_examen": "Novembre 16, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 18, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 19, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 25
-      },
-      {
-        "fecha_examen": "Novembre 2, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 20, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 30, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 4, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 6, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      },
-      {
-        "fecha_examen": "Novembre 9, 2026",
-        "abre_registro": "Sep 1 2026 3:00pm",
-        "spots": 40
-      }
-    ]
+    "estado": "SIN_EVENTO",
+    "fechas": [],
+    "detalle": "Sin aperturas de registro pendientes detectadas",
+    "ts": "2026-09-01T22:11:02.448911",
+    "sesiones": []
   },
   "AF Victoria": {
     "estado": "SIN_EVENTO",
     "fechas": [],
     "detalle": "Sin aperturas de registro pendientes detectadas",
-    "ts": "2026-09-01T18:59:24.644193",
+    "ts": "2026-09-01T22:11:34.015291",
     "sesiones": []
   },
   "AF Toronto": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin fechas detectadas — verificar manualmente",
-    "ts": "2026-09-01T18:59:30.905577",
+    "ts": "2026-09-01T22:11:40.587870",
     "sesiones": []
   },
   "AF Calgary": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-09-01T18:59:35.709302",
+    "ts": "2026-09-01T22:11:45.854243",
     "sesiones": []
   },
   "AF Edmonton": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-09-01T18:59:40.337131",
+    "ts": "2026-09-01T22:11:50.673505",
     "sesiones": []
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-09-01T18:59:45.089774",
+    "ts": "2026-09-01T22:11:55.760049",
     "sesiones": []
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-09-01T19:00:03.418890",
+    "ts": "2026-09-01T22:12:13.994466",
     "sesiones": []
   }
 }
