@@ -27,4 +27,156 @@ DTSTART:19701101T020000
 RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
 END:STANDARD
 END:VTIMEZONE
+BEGIN:VEVENT
+UID:apertura-af-vancouver-0-202609141500@tcf-monitor-nrodrigueze
+DTSTAMP:20260911T122711Z
+DTSTART;TZID=America/Vancouver:20260914T150000
+DTEND;TZID=America/Vancouver:20260914T153000
+SUMMARY:⏰ Registro abre — AF Vancouver (examen December 11\, 2026)
+DESCRIPTION:Centro: AF Vancouver\nFecha del examen: December 11\, 2026\nApe
+ rtura de registro: Sep 14 2026 3:00pm\nCupos disponibles al momento de la 
+ revisión: 28\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/lang
+ uage/exams/tcf-canada/
+LOCATION:6161 Cambie Street\, Vancouver\, BC
+URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Vancouver (examen December 11\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-vancouver-1-202609141500@tcf-monitor-nrodrigueze
+DTSTAMP:20260911T122711Z
+DTSTART;TZID=America/Vancouver:20260914T150000
+DTEND;TZID=America/Vancouver:20260914T153000
+SUMMARY:⏰ Registro abre — AF Vancouver (examen December 14\, 2026)
+DESCRIPTION:Centro: AF Vancouver\nFecha del examen: December 14\, 2026\nApe
+ rtura de registro: Sep 14 2026 3:00pm\nCupos disponibles al momento de la 
+ revisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/lang
+ uage/exams/tcf-canada/
+LOCATION:6161 Cambie Street\, Vancouver\, BC
+URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Vancouver (examen December 14\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-vancouver-2-202609141500@tcf-monitor-nrodrigueze
+DTSTAMP:20260911T122711Z
+DTSTART;TZID=America/Vancouver:20260914T150000
+DTEND;TZID=America/Vancouver:20260914T153000
+SUMMARY:⏰ Registro abre — AF Vancouver (examen December 16\, 2026)
+DESCRIPTION:Centro: AF Vancouver\nFecha del examen: December 16\, 2026\nApe
+ rtura de registro: Sep 14 2026 3:00pm\nCupos disponibles al momento de la 
+ revisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/lang
+ uage/exams/tcf-canada/
+LOCATION:6161 Cambie Street\, Vancouver\, BC
+URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Vancouver (examen December 16\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-vancouver-3-202609141500@tcf-monitor-nrodrigueze
+DTSTAMP:20260911T122711Z
+DTSTART;TZID=America/Vancouver:20260914T150000
+DTEND;TZID=America/Vancouver:20260914T153000
+SUMMARY:⏰ Registro abre — AF Vancouver (examen December 18\, 2026)
+DESCRIPTION:Centro: AF Vancouver\nFecha del examen: December 18\, 2026\nApe
+ rtura de registro: Sep 14 2026 3:00pm\nCupos disponibles al momento de la 
+ revisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/lang
+ uage/exams/tcf-canada/
+LOCATION:6161 Cambie Street\, Vancouver\, BC
+URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Vancouver (examen December 18\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-vancouver-4-202609141500@tcf-monitor-nrodrigueze
+DTSTAMP:20260911T122711Z
+DTSTART;TZID=America/Vancouver:20260914T150000
+DTEND;TZID=America/Vancouver:20260914T153000
+SUMMARY:⏰ Registro abre — AF Vancouver (examen December 2\, 2026)
+DESCRIPTION:Centro: AF Vancouver\nFecha del examen: December 2\, 2026\nAper
+ tura de registro: Sep 14 2026 3:00pm\nCupos disponibles al momento de la r
+ evisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/langu
+ age/exams/tcf-canada/
+LOCATION:6161 Cambie Street\, Vancouver\, BC
+URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Vancouver (examen December 2\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-vancouver-5-202609141500@tcf-monitor-nrodrigueze
+DTSTAMP:20260911T122711Z
+DTSTART;TZID=America/Vancouver:20260914T150000
+DTEND;TZID=America/Vancouver:20260914T153000
+SUMMARY:⏰ Registro abre — AF Vancouver (examen December 4\, 2026)
+DESCRIPTION:Centro: AF Vancouver\nFecha del examen: December 4\, 2026\nAper
+ tura de registro: Sep 14 2026 3:00pm\nCupos disponibles al momento de la r
+ evisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/langu
+ age/exams/tcf-canada/
+LOCATION:6161 Cambie Street\, Vancouver\, BC
+URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Vancouver (examen December 4\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-vancouver-6-202609141500@tcf-monitor-nrodrigueze
+DTSTAMP:20260911T122711Z
+DTSTART;TZID=America/Vancouver:20260914T150000
+DTEND;TZID=America/Vancouver:20260914T153000
+SUMMARY:⏰ Registro abre — AF Vancouver (examen December 7\, 2026)
+DESCRIPTION:Centro: AF Vancouver\nFecha del examen: December 7\, 2026\nAper
+ tura de registro: Sep 14 2026 3:00pm\nCupos disponibles al momento de la r
+ evisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/langu
+ age/exams/tcf-canada/
+LOCATION:6161 Cambie Street\, Vancouver\, BC
+URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Vancouver (examen December 7\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:apertura-af-vancouver-7-202609141500@tcf-monitor-nrodrigueze
+DTSTAMP:20260911T122711Z
+DTSTART;TZID=America/Vancouver:20260914T150000
+DTEND;TZID=America/Vancouver:20260914T153000
+SUMMARY:⏰ Registro abre — AF Vancouver (examen December 9\, 2026)
+DESCRIPTION:Centro: AF Vancouver\nFecha del examen: December 9\, 2026\nAper
+ tura de registro: Sep 14 2026 3:00pm\nCupos disponibles al momento de la r
+ evisión: 40\nRegistrarse aquí: https://www.alliancefrancaise.ca/en/langu
+ age/exams/tcf-canada/
+LOCATION:6161 Cambie Street\, Vancouver\, BC
+URL:https://www.alliancefrancaise.ca/en/language/exams/tcf-canada/
+STATUS:CONFIRMED
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:⏰ Registro abre — AF Vancouver (examen December 9\, 2026)
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
 END:VCALENDAR
