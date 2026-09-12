@@ -12,7 +12,7 @@
       "December 9, 2026"
     ],
     "detalle": "8 apertura(s) de registro detectada(s)",
-    "ts": "2026-09-11T23:41:01.231812",
+    "ts": "2026-09-12T02:04:35.159626",
     "sesiones": [
       {
         "fecha_examen": "December 11, 2026",
@@ -60,42 +60,42 @@
     "estado": "SIN_EVENTO",
     "fechas": [],
     "detalle": "Sin aperturas de registro pendientes detectadas",
-    "ts": "2026-09-11T23:41:08.904044",
+    "ts": "2026-09-12T02:04:43.342497",
     "sesiones": []
   },
   "AF Toronto": {
-    "estado": "BLOQUEADO",
+    "estado": "VERIFICAR",
     "fechas": [],
-    "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-09-11T23:41:15.078230",
+    "detalle": "Sin fechas detectadas — verificar manualmente",
+    "ts": "2026-09-12T02:04:49.811766",
     "sesiones": []
   },
   "AF Calgary": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-09-11T23:41:33.746464",
+    "ts": "2026-09-12T02:04:54.494167",
     "sesiones": []
   },
   "AF Edmonton": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Sin señales claras — verificar manualmente",
-    "ts": "2026-09-11T23:41:38.238102",
+    "ts": "2026-09-12T02:04:59.224003",
     "sesiones": []
   },
   "Ashton Testing Services": {
     "estado": "BLOQUEADO",
     "fechas": [],
     "detalle": "Sitio bloqueó el acceso. Verificar manualmente.",
-    "ts": "2026-09-11T23:41:42.938337",
+    "ts": "2026-09-12T02:05:04.271156",
     "sesiones": []
   },
   "GB Language Centre": {
     "estado": "VERIFICAR",
     "fechas": [],
     "detalle": "Página renderiza con JS; verificar manualmente en gblc.ca",
-    "ts": "2026-09-11T23:42:01.193084",
+    "ts": "2026-09-12T02:05:25.214278",
     "sesiones": []
   }
 }
